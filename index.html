@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>AquiTem · Comércios do seu bairro</title>
+  <title>AquiTem · Tudo do seu bairro</title>
+  <!-- Google Fonts + Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <style>
+    /* ========== RESET + VARIÁVEIS (IDENTIDADE VISUAL MODERNA) ========== */
     * {
       margin: 0;
       padding: 0;
@@ -14,161 +16,145 @@
     }
 
     :root {
-      --primary: #10b981;
-      --primary-dark: #059669;
-      --secondary: #0f172a;
-      --secondary-light: #1e293b;
-      --background: #f8fafc;
-      --white: #ffffff;
-      --text: #0f172a;
-      --text-light: #475569;
-      --gray: #e2e8f0;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-      --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
-      --radius: 20px;
-      --radius-sm: 14px;
+      --primary: #2ECC71;
+      --primary-dark: #27ae60;
+      --secondary: #0A3D62;
+      --secondary-light: #1e4a76;
+      --background: #F5F7FA;
+      --white: #FFFFFF;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --gray-light: #eef2f6;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --radius-card: 20px;
+      --radius-btn: 40px;
     }
 
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--background);
-      color: var(--text);
+      color: var(--text-dark);
       padding-bottom: 80px;
     }
 
-    /* HEADER COM FUNDO NEUTRO PARA DESTACAR A LOGO */
+    /* ========== HEADER (BRANCO, SOMBRA, LOGO DESTAQUE) ========== */
     .header {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
       width: 100%;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: white;
-      padding: 1rem 1.25rem 0.9rem;
-      box-shadow: var(--shadow-md);
-      z-index: 100;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .header-container {
+      background: var(--white);
+      padding: 12px 16px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 0.85rem;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      z-index: 99;
+      backdrop-filter: blur(0px);
     }
 
-    /* ÁREA DA LOGO COM FUNDO DESTACADO */
-    .logo-wrapper {
+    .logo-link {
       display: flex;
-      justify-content: center;
       align-items: center;
-      width: 100%;
-    }
-
-    .logo-highlight {
-      background: #ffffff;
-      padding: 0.6rem 1.2rem;
-      border-radius: 60px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.5);
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.2s ease;
-    }
-
-    .logo-highlight:hover {
-      transform: scale(1.01);
+      text-decoration: none;
     }
 
     .app-logo {
-      width: 170px;
-      max-width: 85%;
-      height: auto;
-      display: block;
+      height: 65px;
+      width: auto;
+      max-width: 180px;
       object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      display: block;
+      transition: transform 0.2s ease;
     }
 
-    /* RESPONSIVIDADE DA LOGO */
-    @media (min-width: 640px) {
-      .app-logo {
-        width: 200px;
-      }
-      .logo-highlight {
-        padding: 0.7rem 1.5rem;
-      }
+    .app-logo:hover {
+      transform: scale(1.01);
     }
 
-    /* BARRA DE PESQUISA REFINADA */
-    .search-wrapper {
+    /* placeholder para ações futuras (ícone de notificações, etc - mantém layout) */
+    .header-actions {
+      width: 40px;
+      visibility: hidden;
+    }
+
+    /* ========== HERO (GRADIENTE, BUSCA, SLOGAN) ========== */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 24px 20px 32px;
+      border-radius: 0 0 28px 28px;
+      color: white;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .hero-slogan {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: -0.2px;
       display: flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 60px;
-      padding: 0.2rem 1rem;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.25);
+      gap: 8px;
+    }
+
+    .hero-slogan i {
+      font-size: 1.6rem;
+    }
+
+    .search-box {
       width: 100%;
+      background: var(--white);
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      padding: 4px 8px 4px 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
       transition: all 0.2s;
     }
 
-    .search-wrapper:focus-within {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255,255,255,0.5);
-      box-shadow: 0 0 0 2px rgba(16,185,129,0.3);
-    }
-
-    .search-icon {
-      color: white;
-      margin-right: 0.5rem;
+    .search-box i {
+      color: var(--text-muted);
       font-size: 1.3rem;
     }
 
     .search-input {
-      background: transparent;
+      flex: 1;
       border: none;
-      padding: 0.7rem 0;
-      font-size: 0.9rem;
-      color: white;
-      width: 100%;
-      outline: none;
+      padding: 14px 10px;
+      font-size: 0.95rem;
       font-family: 'Inter', sans-serif;
+      outline: none;
+      background: transparent;
+      color: var(--text-dark);
     }
 
     .search-input::placeholder {
-      color: rgba(255,255,255,0.7);
+      color: #94a3b8;
       font-weight: 400;
     }
 
-    /* MAIN - ajuste do topo pois o header ficou mais alto */
+    /* ========== MAIN CONTENT (AJUSTE) ========== */
     .main-container {
-      margin-top: 180px;
-      padding: 0 1rem 1rem 1rem;
+      padding: 0 16px 24px;
     }
 
-    @media (min-width: 640px) {
-      .main-container {
-        margin-top: 200px;
-      }
-    }
-
-    /* CATEGORIAS */
+    /* ========== CATEGORIAS (MODERNAS) ========== */
     .categories-bar {
       display: flex;
-      gap: 0.75rem;
+      gap: 12px;
       overflow-x: auto;
       scrollbar-width: thin;
-      padding-bottom: 0.75rem;
-      margin-bottom: 1.5rem;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
       scroll-snap-type: x mandatory;
     }
 
     .cat-btn {
       background: var(--white);
-      border: 1px solid var(--gray);
+      border: 1px solid #e2e8f0;
       border-radius: 40px;
-      padding: 0.6rem 1.3rem;
+      padding: 10px 18px;
       font-family: 'Inter', sans-serif;
       font-weight: 600;
       font-size: 0.85rem;
@@ -177,88 +163,90 @@
       color: var(--secondary);
       white-space: nowrap;
       scroll-snap-align: start;
+      box-shadow: var(--shadow-sm);
     }
 
     .cat-btn.active {
       background: var(--primary);
       border-color: var(--primary);
       color: white;
-      box-shadow: 0 4px 8px rgba(16,185,129,0.25);
+      box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
     }
 
-    /* DESTAQUES */
+    /* ========== SEÇÃO DESTAQUES (CARDS HORIZONTAIS) ========== */
     .destaques-section {
-      margin-bottom: 2rem;
+      margin-bottom: 28px;
     }
 
     .section-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      gap: 8px;
+      margin-bottom: 14px;
     }
 
     .section-header h2 {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--secondary);
     }
 
     .destaques-horizontal {
       display: flex;
-      gap: 1rem;
+      gap: 16px;
       overflow-x: auto;
-      padding-bottom: 0.5rem;
+      padding-bottom: 8px;
       scroll-snap-type: x mandatory;
     }
 
     .card-destaque {
       flex: 0 0 260px;
       background: var(--white);
-      border-radius: var(--radius-sm);
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-sm);
       scroll-snap-align: start;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .card-destaque:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       box-shadow: var(--shadow-md);
     }
 
     .card-destaque img {
       width: 100%;
-      height: 130px;
+      height: 140px;
       object-fit: cover;
     }
 
     .destaque-info {
-      padding: 0.8rem;
+      padding: 12px;
     }
 
     .destaque-info h4 {
       font-size: 1rem;
       font-weight: 700;
+      margin-bottom: 4px;
     }
 
     .destaque-info p {
       font-size: 0.7rem;
-      color: var(--text-light);
+      color: var(--text-muted);
     }
 
     .wpp-mini {
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 6px;
       background: #25D366;
       color: white;
-      padding: 0.3rem 0.8rem;
-      border-radius: 30px;
+      padding: 6px 14px;
+      border-radius: 40px;
       font-size: 0.7rem;
       text-decoration: none;
-      margin-top: 0.6rem;
-      font-weight: 500;
+      font-weight: 600;
+      margin-top: 10px;
       transition: 0.2s;
     }
 
@@ -266,12 +254,12 @@
       background: #128C7E;
     }
 
-    /* LISTA + GRID */
+    /* ========== LISTA / GRID DE COMÉRCIOS ========== */
     .list-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin: 1rem 0 1.2rem 0;
+      margin: 8px 0 18px 0;
       flex-wrap: wrap;
     }
 
@@ -282,8 +270,8 @@
     }
 
     .result-badge {
-      background: var(--gray);
-      padding: 0.25rem 0.9rem;
+      background: var(--gray-light);
+      padding: 6px 14px;
       border-radius: 40px;
       font-size: 0.75rem;
       font-weight: 600;
@@ -293,7 +281,7 @@
     .comercios-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.25rem;
+      gap: 18px;
     }
 
     @media (min-width: 640px) {
@@ -308,13 +296,13 @@
       }
     }
 
-    /* CARD */
+    /* ========== CARDS MODERNOS (REDESIGN) ========== */
     .card-comercio {
       background: var(--white);
-      border-radius: var(--radius);
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
       position: relative;
     }
 
@@ -325,25 +313,25 @@
 
     .card-img {
       width: 100%;
-      height: 160px;
+      height: 170px;
       object-fit: cover;
       background: #eef2ff;
     }
 
     .card-badges {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      top: 14px;
+      left: 14px;
       display: flex;
-      gap: 0.6rem;
+      gap: 8px;
     }
 
     .badge-verified, .badge-destaque {
-      background: rgba(0,0,0,0.7);
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(6px);
-      padding: 0.25rem 0.7rem;
+      padding: 5px 12px;
       border-radius: 40px;
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -351,56 +339,56 @@
       color: white;
     }
 
-    .badge-verified { background: #0f172a; }
-    .badge-destaque { background: #f59e0b; }
+    .badge-verified { background: var(--secondary); }
+    .badge-destaque { background: #f39c12; }
 
     .card-content {
-      padding: 1rem 1rem 1.1rem;
+      padding: 16px;
     }
 
     .card-content h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.2rem;
-      color: var(--secondary);
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--text-dark);
     }
 
     .categoria-tag {
       font-size: 0.7rem;
       color: var(--primary);
       font-weight: 700;
-      margin-bottom: 0.5rem;
-      display: inline-block;
       background: #e0f2fe;
-      padding: 0.15rem 0.6rem;
-      border-radius: 20px;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 30px;
+      margin-bottom: 10px;
     }
 
     .descricao {
-      font-size: 0.75rem;
-      color: var(--text-light);
-      margin: 0.5rem 0;
-      line-height: 1.35;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 8px 0 12px;
+      line-height: 1.4;
     }
 
     .card-actions {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 0.9rem;
+      margin-top: 8px;
     }
 
     .btn-wpp {
       background: #25D366;
       color: white;
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 10px 16px;
       border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.75rem;
+      font-weight: 700;
+      font-size: 0.8rem;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       cursor: pointer;
       transition: 0.2s;
       text-decoration: none;
@@ -408,7 +396,7 @@
 
     .btn-wpp:hover {
       background: #128C7E;
-      transform: scale(0.97);
+      transform: scale(0.96);
     }
 
     .btn-fav {
@@ -419,13 +407,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px;
+      padding: 10px;
       border-radius: 50%;
       transition: 0.2s;
     }
 
     .btn-fav i {
-      font-size: 1.7rem;
+      font-size: 1.8rem;
     }
 
     .btn-fav.favoritado i {
@@ -433,19 +421,19 @@
       font-variation-settings: 'FILL' 1;
     }
 
-    /* NAVEGAÇÃO INFERIOR */
+    /* ========== BOTTOM NAV (MODERNO) ========== */
     .bottom-nav {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.96);
       backdrop-filter: blur(12px);
       display: flex;
       justify-content: space-around;
-      padding: 0.5rem 1rem 0.9rem;
+      padding: 8px 16px 16px;
       box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.04);
-      border-top: 1px solid rgba(0,0,0,0.05);
+      border-top: 1px solid rgba(0,0,0,0.04);
       z-index: 99;
     }
 
@@ -462,36 +450,37 @@
       transition: 0.2s;
       gap: 4px;
       font-weight: 500;
+      min-width: 64px;
     }
 
     .nav-item i {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
 
     .nav-item.active {
       color: var(--primary);
-      font-weight: 600;
+      font-weight: 700;
     }
 
-    /* PERFIL */
+    /* ========== PERFIL (MESMA FUNCIONALIDADE) ========== */
     .perfil-container {
       background: var(--white);
-      border-radius: var(--radius);
-      padding: 2rem 1.5rem;
+      border-radius: 28px;
+      padding: 32px 20px;
       text-align: center;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-sm);
     }
 
     .perfil-avatar {
-      background: linear-gradient(145deg, var(--secondary), #334155);
-      width: 88px;
-      height: 88px;
+      background: linear-gradient(145deg, var(--secondary), #1e4a76);
+      width: 90px;
+      height: 90px;
       border-radius: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 1.2rem;
-      box-shadow: 0 8px 14px rgba(0,0,0,0.1);
+      margin: 0 auto 18px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
     }
 
     .perfil-avatar i {
@@ -500,54 +489,74 @@
     }
 
     .perfil-container h3 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
     }
 
     .fav-stats {
       background: #eef2ff;
-      padding: 0.5rem 1rem;
+      padding: 8px 18px;
       border-radius: 60px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin: 1.2rem 0;
-      font-weight: 600;
+      margin: 20px 0;
+      font-weight: 700;
     }
 
     .empty-message {
       text-align: center;
-      padding: 2rem;
-      color: #64748b;
+      padding: 40px 20px;
+      color: var(--text-muted);
       font-weight: 500;
       background: var(--white);
-      border-radius: var(--radius-sm);
-      margin-top: 1rem;
+      border-radius: 28px;
+      margin-top: 20px;
+    }
+
+    /* micro interações e ajustes */
+    button, .btn-wpp, .cat-btn, .nav-item {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    /* Garantir que todos os toques tenham área mínima */
+    .btn-fav, .nav-item, .cat-btn, .btn-wpp {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER COM LOGO DESTACADA (sem texto AlmoxFlow) -->
+  <!-- HEADER BRANCO COM LOGO CENTRALIZADA (expandida) -->
   <header class="header">
-    <div class="header-container">
-      <div class="logo-wrapper">
-        <div class="logo-highlight">
-          <img class="app-logo" 
-               src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
-               alt="AquiTem Logo"
-               loading="eager"
-               onerror="this.onerror=null; this.src='https://placehold.co/200x80/10b981/white?text=AquiTem';">
-        </div>
-      </div>
-      <div class="search-wrapper">
-        <i class="material-icons search-icon">search</i>
-        <input type="text" id="searchInput" placeholder="Buscar comércio, serviço ou produto..." class="search-input">
-      </div>
+    <div class="logo-link">
+      <img class="app-logo" 
+           src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
+           alt="AquiTem Logo"
+           loading="eager"
+           onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
     </div>
+    <div class="header-actions"></div> <!-- espaçador para manter simetria -->
   </header>
 
+  <!-- HERO COM GRADIENTE + BUSCA (Nova experiência) -->
+  <div class="hero">
+    <div class="hero-slogan">
+      <i class="material-icons">storefront</i>
+      <span>Tudo do seu bairro, em um só lugar</span>
+    </div>
+    <div class="search-box">
+      <i class="material-icons">search</i>
+      <input type="text" id="searchInput" placeholder="Buscar comércio, serviço ou produto..." class="search-input">
+    </div>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL (mantém estrutura de classes) -->
   <main class="main-container" id="mainContent">
     <!-- Categorias -->
     <div class="categories-bar" id="categoriesBar">
@@ -561,23 +570,24 @@
     <!-- Destaques -->
     <div id="destaquesSection" class="destaques-section">
       <div class="section-header">
-        <i class="material-icons" style="color: #f59e0b;">whatshot</i>
+        <i class="material-icons" style="color: #f39c12;">local_fire_department</i>
         <h2>Destaques da semana</h2>
       </div>
       <div id="destaquesContainer" class="destaques-horizontal"></div>
     </div>
 
-    <!-- Cabeçalho da lista -->
+    <!-- Cabeçalho da lista + contador -->
     <div class="list-header">
       <h2 id="listTitle">Comércios parceiros</h2>
       <span id="resultCount" class="result-badge">0 resultados</span>
     </div>
 
-    <!-- Grid -->
+    <!-- Grid de comércios -->
     <div id="comerciosGrid" class="comercios-grid"></div>
     <div id="emptyMessage" class="empty-message" style="display: none;">Nenhum comércio encontrado 😕</div>
   </main>
 
+  <!-- NAVEGAÇÃO INFERIOR -->
   <nav class="bottom-nav">
     <button class="nav-item active" data-tab="inicio">
       <i class="material-icons">home</i>
@@ -598,7 +608,8 @@
   </nav>
 
   <script>
-    // Dados dos comércios
+    // ========== MESMA LÓGICA JS (NENHUMA ALTERAÇÃO FUNCIONAL) ==========
+    // Dados dos comércios (original)
     const comercios = [
       { id: 1, nome: "Lanchonete do João", categoria: "Lanches", imagem: "https://placehold.co/600x400/FFA07A/white?text=João's+Burguer", whatsapp: "5583999999999", verificado: true, destaque: true, descricao: "Hambúrguer artesanal, milkshakes e porções especiais." },
       { id: 2, nome: "Supermercado Bom Preço", categoria: "Mercados", imagem: "https://placehold.co/600x400/87CEEB/white?text=Bom+Preço", whatsapp: "5583888888888", verificado: false, destaque: false, descricao: "Produtos frescos, açougue e padaria quentinha." },
@@ -680,10 +691,10 @@
 
         let badgesHtml = '';
         if (comercio.verificado) {
-          badgesHtml += `<span class="badge-verified"><i class="material-icons" style="font-size: 0.9rem;">verified</i> Verificado</span>`;
+          badgesHtml += `<span class="badge-verified"><i class="material-icons" style="font-size: 0.8rem;">verified</i> Verificado</span>`;
         }
         if (comercio.destaque) {
-          badgesHtml += `<span class="badge-destaque"><i class="material-icons" style="font-size: 0.9rem;">local_fire_department</i> Destaque</span>`;
+          badgesHtml += `<span class="badge-destaque"><i class="material-icons" style="font-size: 0.8rem;">local_fire_department</i> Destaque</span>`;
         }
 
         card.innerHTML = `
