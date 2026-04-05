@@ -847,7 +847,6 @@
     </select>
   </div>
 
-  <!-- NOVA SEÇÃO: POPULARES NO SEU BAIRRO -->
   <div id="popularesSection" class="populares-section" style="display: none;">
     <div class="section-header"><i class="material-icons" style="color: #e67e22;">whatshot</i><h2>🔥 Populares no seu bairro</h2></div>
     <div id="popularesContainer" class="populares-horizontal"></div>
@@ -858,7 +857,6 @@
     <div id="destaquesContainer" class="destaques-horizontal"></div>
   </div>
 
-  <!-- NOVA SEÇÃO: RECOMENDADOS PARA VOCÊ -->
   <div id="recomendadosSection" class="recomendados-section" style="display: none;">
     <div class="section-header"><i class="material-icons" style="color: #9b59b6;">star</i><h2>⭐ Recomendado para você</h2></div>
     <div id="recomendadosContainer" class="recomendados-horizontal"></div>
@@ -899,16 +897,14 @@
     "Valentina Figueiredo", "Varadouro", "Varjão"
   ];
 
-  // ========== COMÉRCIOS ==========
-  // IMPORTANTE: Para a Óticas Day, foi adicionada a imagem direta do GitHub.
-  // Substitua a URL abaixo pelo link real do arquivo "1.Oticas Day.png" no seu repositório.
+  // ========== COMÉRCIOS COM IMAGENS CORRIGIDAS ==========
+  // Todas as URLs foram extraídas dos blocos fornecidos pelo usuário e aplicadas diretamente.
   const comercios = [
     {
       id: 1,
       nome: "Óticas Day",
       categoria: "Serviços",
-      imagem: "https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/1.Oticas%20Day.png", // <-- TROQUE PELA URL REAL DO GITHUB
-      // imageId: "1KtUnhPyWtadyyLt5p5aTMRsAb4JGaNIa", // comentado para usar a imagem do GitHub
+      imagem: "https://cdn6.campograndenews.com.br/uploads/noticias/2022/09/19/c0a95beb4b636a8ba2a9b89ecf3d99e2143a3b1b.jpg",
       whatsapp: "558389124525",
       verificado: true,
       destaque: true,
@@ -920,7 +916,7 @@
       id: 2,
       nome: "Farmácia Popular",
       categoria: "Farmácia",
-      imageId: "10NGiUsDmsMDuN22XqhdXjVdyv-zb4RiT",
+      imagem: "https://www.safol.com.br/storage/app/uploads/public/1a9/cea/93b/thumb__800_0_0_0_auto.webp",
       whatsapp: "5583777777777",
       verificado: true,
       destaque: true,
@@ -932,7 +928,7 @@
       id: 3,
       nome: "Mecânica Rápida",
       categoria: "Serviços",
-      imageId: "1nDce-_7f867PfDxE7ErHClLqg-VQ8Ate",
+      imagem: "https://isoflex.com.br/wp-content/uploads/2023/11/gestao-de-oficina-mecanica-como-melhorar.jpg",
       whatsapp: "5583666666666",
       verificado: true,
       destaque: true,
@@ -944,7 +940,7 @@
       id: 4,
       nome: "Kasa do Keijo",
       categoria: "Mercados",
-      imageId: "https://cdn.awsli.com.br/2185/2185383/arquivos/whatsapp-image-2020-09-03-at-16-11-39.jpg",
+      imagem: "https://merchanplasticos.com.br/wp-content/uploads/2023/03/Caixa-Hortifruti.jpg",
       whatsapp: "5583555555555",
       verificado: true,
       destaque: true,
@@ -956,7 +952,7 @@
       id: 5,
       nome: "Pet Shop Amigo",
       categoria: "Serviços",
-      imageId: "1ClEf2BMuptQ6630rC-suE68OqtzQ9DTY",
+      imagem: "https://www.inewsbr.com/wp-content/uploads/2022/05/Woof.png",
       whatsapp: "5583444444444",
       verificado: false,
       destaque: false,
@@ -968,7 +964,7 @@
       id: 6,
       nome: "Lanchonete Sabor Caseiro",
       categoria: "Lanches",
-      imageId: "1r2itKtkyxuJyM5oXnfg7G6QZTRtII8_6",
+      imagem: "https://diariodocomercio.com.br/wp-content/uploads/2024/05/vendas-dia-do-hamburguer-aumentar-belo-horizonte.jpg",
       whatsapp: "5583333333333",
       verificado: true,
       destaque: false,
@@ -1018,7 +1014,6 @@
     renderizar();
   }
 
-  // ORDENAÇÃO INTELIGENTE (destaques primeiro)
   function getComerciosFiltrados() {
     let lista = [];
     if (activeTab === 'favoritos') lista = comercios.filter(c => favoritos.includes(c.id));
@@ -1030,7 +1025,6 @@
       const term = searchTerm.toLowerCase();
       lista = lista.filter(c => c.nome.toLowerCase().includes(term) || c.categoria.toLowerCase().includes(term) || c.descricao.toLowerCase().includes(term) || (c.bairro && c.bairro.toLowerCase().includes(term)));
     }
-    // Ordenação: destaque primeiro
     lista.sort((a, b) => {
       if (a.destaque && !b.destaque) return -1;
       if (!a.destaque && b.destaque) return 1;
@@ -1092,7 +1086,6 @@
     });
   }
 
-  // POPULARES NO SEU BAIRRO
   function renderizarPopulares() {
     const section = document.getElementById('popularesSection');
     const container = document.getElementById('popularesContainer');
@@ -1108,7 +1101,6 @@
     });
   }
 
-  // RECOMENDADOS baseado nas categorias favoritadas
   function getCategoriasFavoritadas() {
     const favComercios = comercios.filter(c => favoritos.includes(c.id));
     const catCount = {};
@@ -1161,12 +1153,10 @@
     }
   }
 
-  // GEOLOCALIZAÇÃO
   function detectarLocalizacao() {
     if (!navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        // Simulação: define bairro como Bancários (exemplo)
         const bairroDetectado = "Bancários";
         if (bairrosJoaoPessoa.includes(bairroDetectado)) {
           selectedBairro = bairroDetectado;
@@ -1181,7 +1171,6 @@
     );
   }
 
-  // REDUÇÃO DE ESFORÇO
   searchInput.addEventListener('input', (e) => { searchTerm = e.target.value; if (searchTerm) activeCategory = 'all'; document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active')); document.querySelector('.cat-btn[data-cat="all"]').classList.add('active'); renderizar(); });
   bairroSelect.addEventListener('change', (e) => { selectedBairro = e.target.value; searchTerm = ''; searchInput.value = ''; renderizar(); });
 
@@ -1194,7 +1183,6 @@
     });
   }
 
-  // PROMOÇÕES COM URGÊNCIA
   const promocoes = [
     { nome: "Hambúrguer + Batata", preco: "R$ 19,90", imagem: "https://placehold.co/600x400/FFB347/white?text=Hambúrguer", tag: "🔥 Hoje", urgencia: "⏱️ Só hoje" },
     { nome: "Pizza Grande (8 fatias)", preco: "R$ 29,90", imagem: "https://placehold.co/600x400/FF6B6B/white?text=Pizza", tag: "🎉 Promoção", urgencia: "⏱️ Até 18h" },
