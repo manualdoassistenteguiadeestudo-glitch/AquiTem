@@ -620,7 +620,7 @@
       font-weight: 700;
     }
 
-    /* ========== PERFIL ========== */
+    /* ========== PERFIL (SOBRE NÓS) ========== */
     .perfil-container {
       background: var(--white);
       border-radius: 28px;
@@ -650,17 +650,55 @@
       font-size: 1.5rem;
       font-weight: 800;
       margin-bottom: 8px;
+      color: var(--secondary);
     }
 
-    .fav-stats {
-      background: #eef2ff;
-      padding: 8px 18px;
-      border-radius: 60px;
-      display: inline-flex;
+    .sobre-texto {
+      text-align: left;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--text-dark);
+      margin-top: 20px;
+    }
+
+    .sobre-texto p {
+      margin-bottom: 1rem;
+    }
+
+    .sobre-texto strong {
+      color: var(--primary-dark);
+    }
+
+    .missao-box, .diferencial-box {
+      background: #f0f9f4;
+      padding: 16px;
+      border-radius: 20px;
+      margin: 20px 0;
+      border-left: 4px solid var(--primary);
+      text-align: left;
+    }
+
+    .missao-box h4, .diferencial-box h4 {
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--secondary);
+    }
+
+    .valores-lista {
+      list-style: none;
+      padding-left: 0;
+      margin: 16px 0;
+    }
+
+    .valores-lista li {
+      padding: 6px 0;
+      display: flex;
       align-items: center;
       gap: 8px;
-      margin: 20px 0;
-      font-weight: 700;
+    }
+
+    .valores-lista li i {
+      color: var(--primary);
     }
 
     .empty-message {
@@ -672,9 +710,66 @@
       border-radius: 28px;
       margin-top: 20px;
     }
+
+    /* ========== SPLASH SCREEN ========== */
+    #splashScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .splash-logo {
+      width: 180px;
+      max-width: 70%;
+      margin-bottom: 32px;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+    }
+
+    .splash-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+
+    .splash-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 280px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    .splash-highlight {
+      color: var(--primary);
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
+
+<!-- SPLASH SCREEN -->
+<div id="splashScreen">
+  <img class="splash-logo" 
+       src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
+       alt="AquiTem"
+       onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
+  <div class="splash-title">Bem-vindo ao AquiTEM!</div>
+  <div class="splash-sub">
+    <span class="splash-highlight">AquiTEM</span> — todo o comércio de João Pessoa, na palma da sua mão.<br>
+    Descubra, explore e confie em comércios reais perto de você.
+  </div>
+</div>
 
 <header class="header">
   <img class="app-logo" 
@@ -739,7 +834,7 @@
   <button class="nav-item active" data-tab="inicio"><i class="material-icons">home</i><span>Início</span></button>
   <button class="nav-item" data-tab="buscar"><i class="material-icons">search</i><span>Buscar</span></button>
   <button class="nav-item" data-tab="favoritos"><i class="material-icons">favorite</i><span>Favoritos</span></button>
-  <button class="nav-item" data-tab="perfil"><i class="material-icons">person</i><span>Perfil</span></button>
+  <button class="nav-item" data-tab="perfil"><i class="material-icons">person</i><span>Sobre Nós</span></button>
 </nav>
 
 <script>
@@ -976,27 +1071,53 @@
     });
   }
 
-  function renderizarPerfil() {
-    const totalFavoritos = favoritos.length;
+  // NOVA FUNÇÃO: TELA SOBRE NÓS (substitui o antigo perfil)
+  function renderizarSobreNos() {
     gridContainer.style.display = 'block';
     gridContainer.innerHTML = `
       <div class="perfil-container">
-        <div class="perfil-avatar"><i class="material-icons">storefront</i></div>
-        <h3>Minha Conta</h3>
-        <p style="color:#475569;">Bem-vindo ao ecossistema AquiTem</p>
-        <div class="fav-stats"><i class="material-icons">favorite</i> ${totalFavoritos} comércio${totalFavoritos !== 1 ? 's' : ''} favoritado${totalFavoritos !== 1 ? 's' : ''}</div>
-        <p style="font-size:0.75rem; margin-top:1rem; color:#334155;">Sua rede de comércios locais, sempre na mão</p>
-        <p style="font-size:0.7rem; color:#94a3b8;">AquiTem v2.0 · conexão segura via WhatsApp</p>
+        <div class="perfil-avatar"><i class="material-icons">info</i></div>
+        <h3>Sobre Nós</h3>
+        <div class="sobre-texto">
+          <p>O <strong>AquiTEM</strong> nasceu de uma experiência real — e de um problema cada vez mais comum: a falta de confiança nas compras online com comércios locais.</p>
+          <p>Após vivenciar um golpe ao comprar um produto de um estabelecimento inexistente, surgiu a necessidade de criar algo diferente. Não apenas mais um aplicativo de busca ou delivery, mas uma plataforma com um propósito claro: <strong>garantir que o comércio seja real antes mesmo do primeiro contato</strong>.</p>
+          <p>Foi assim que nasceu o <strong>AquiTEM</strong>.</p>
+          
+          <div class="missao-box">
+            <h4>🎯 Nossa Missão</h4>
+            <p>Proteger consumidores e valorizar o comércio local legítimo.</p>
+          </div>
+          
+          <p><strong>O que fazemos:</strong> Cada estabelecimento passa por um processo de verificação, incluindo validação de endereço, contato e, quando possível, verificação física.</p>
+          <p>👉 <strong>Se está no AquiTEM, é porque existe.</strong></p>
+          
+          <div class="valores-lista">
+            <li><i class="material-icons">verified</i> Confiança é mais importante que conveniência</li>
+            <li><i class="material-icons">security</i> Segurança vem antes da escolha</li>
+            <li><i class="material-icons">storefront</i> O comércio local merece ser valorizado</li>
+            <li><i class="material-icons">devices</i> A tecnologia deve proteger o usuário</li>
+          </div>
+          
+          <div class="diferencial-box">
+            <h4>✨ Nosso diferencial</h4>
+            <p>Somos uma rede de verificação e confiança.</p>
+          </div>
+          
+          <p><strong>Nossa visão:</strong> Ser referência na validação de comércios no Brasil.</p>
+          <p><strong>AquiTEM é mais do que um aplicativo:</strong><br>
+          É uma ferramenta de proteção.<br>
+          É um novo jeito de confiar.</p>
+        </div>
       </div>
     `;
     emptyMsg.style.display = 'none';
     resultCountSpan.innerText = '';
-    listTitle.innerText = 'Perfil';
+    listTitle.innerText = 'Sobre Nós';
   }
 
   function renderizar() {
     if (activeTab === 'perfil') {
-      renderizarPerfil();
+      renderizarSobreNos();
       return;
     }
     if (activeTab === 'favoritos') listTitle.innerText = 'Meus Favoritos';
@@ -1067,6 +1188,17 @@
     if (isAutoPlaying) { isAutoPlaying = false; clearInterval(autoplayInterval); document.getElementById('autoplayStatus').innerText = '⏸ Pausado'; }
     else { isAutoPlaying = true; startAutoplay(); }
   });
+
+  // ========== SPLASH SCREEN: REMOVER APÓS 3 SEGUNDOS ==========
+  setTimeout(() => {
+    const splash = document.getElementById('splashScreen');
+    if (splash) {
+      splash.style.opacity = '0';
+      setTimeout(() => {
+        splash.style.display = 'none';
+      }, 500);
+    }
+  }, 3000);
 
   function init() {
     initEventListeners();
