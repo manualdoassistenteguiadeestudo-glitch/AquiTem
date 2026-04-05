@@ -554,6 +554,7 @@
       <button class="cat-btn" data-cat="Mercados">🛒 Mercados</button>
       <button class="cat-btn" data-cat="Serviços">🛠 Serviços</button>
       <button class="cat-btn" data-cat="Farmácia">💊 Farmácia</button>
+      <button class="cat-btn" data-cat="Comida">🍽️ Janta</button>
     </div>
 
     <!-- Destaques -->
@@ -599,8 +600,16 @@
   <script>
     // ========== LÓGICA ORIGINAL (NENHUMA ALTERAÇÃO) ==========
     const comercios = [
-      { id: 1, nome: "Lanchonete do João", categoria: "Lanches", imagem: "https://placehold.co/600x400/FFA07A/white?text=João's+Burguer", whatsapp: "5583999999999", verificado: true, destaque: true, descricao: "Hambúrguer artesanal, milkshakes e porções especiais." },
-      { id: 2, nome: "Supermercado Bom Preço", categoria: "Mercados", imagem: "https://placehold.co/600x400/87CEEB/white?text=Bom+Preço", whatsapp: "5583888888888", verificado: false, destaque: false, descricao: "Produtos frescos, açougue e padaria quentinha." },
+{
+  id: 1,
+  nome: "Sopa da Tia Ivaneide",
+  categoria: "Janta",
+  imagem: "https://lh3.googleusercontent.com/d/1sQhI6tbfiNzeY6kSzaOsGK9Z13upZ_sl",
+  whatsapp: "5583999999999",
+  verificado: true,
+  destaque: true,
+  descricao: "Sabor caseiro e sustância: cubos macios de carne bovina cozidos lentamente com legumes selecionados e o tempero especial da Tia Ivaneide. Conforto em cada colherada."
+}      { id: 2, nome: "Supermercado Bom Preço", categoria: "Mercados", imagem: "https://placehold.co/600x400/87CEEB/white?text=Bom+Preço", whatsapp: "5583888888888", verificado: false, destaque: false, descricao: "Produtos frescos, açougue e padaria quentinha." },
       { id: 3, nome: "Farmácia Popular", categoria: "Farmácia", imagem: "https://placehold.co/600x400/98FB98/white?text=Farmácia+Popular", whatsapp: "5583777777777", verificado: true, destaque: true, descricao: "Medicamentos genéricos e atendimento 24h com entrega." },
       { id: 4, nome: "Mecânica Rápida", categoria: "Serviços", imagem: "https://placehold.co/600x400/D3D3D3/white?text=Mecânica+Rápida", whatsapp: "5583666666666", verificado: false, destaque: false, descricao: "Revisão, troca de óleo, freios e diagnósticos." },
       { id: 5, nome: "Mercado do Bairro", categoria: "Mercados", imagem: "https://placehold.co/600x400/FFDAB9/white?text=Mercado+Bairro", whatsapp: "5583555555555", verificado: true, destaque: true, descricao: "Hortifrúti orgânico e produtos regionais." },
