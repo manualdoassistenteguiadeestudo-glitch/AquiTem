@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>AquiTem · Tudo do seu bairro</title>
-  <!-- Google Fonts + Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <style>
@@ -26,7 +25,7 @@
       --text-muted: #64748b;
       --gray-light: #eef2f6;
       --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
       --radius-card: 20px;
       --radius-btn: 40px;
     }
@@ -38,31 +37,23 @@
       padding-bottom: 80px;
     }
 
-    /* ========== HEADER (BRANCO, SOMBRA, LOGO DESTAQUE) ========== */
+    /* ========== HEADER BRANCO COM LOGO CENTRALIZADA E AMPLIADA ========== */
     .header {
+      background: #ffffff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
       position: sticky;
       top: 0;
-      width: 100%;
-      background: var(--white);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: var(--shadow-sm);
       z-index: 99;
-      backdrop-filter: blur(0px);
-    }
-
-    .logo-link {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
     }
 
     .app-logo {
-      height: 65px;
+      height: 70px;
       width: auto;
-      max-width: 180px;
+      max-width: 200px;
       object-fit: contain;
       display: block;
       transition: transform 0.2s ease;
@@ -72,36 +63,25 @@
       transform: scale(1.01);
     }
 
-    /* placeholder para ações futuras (ícone de notificações, etc - mantém layout) */
-    .header-actions {
-      width: 40px;
-      visibility: hidden;
-    }
-
-    /* ========== HERO (GRADIENTE, BUSCA, SLOGAN) ========== */
+    /* ========== HERO COM GRADIENTE (SEM REMOVER NENHUM ELEMENTO) ========== */
     .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      padding: 24px 20px 32px;
-      border-radius: 0 0 28px 28px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 24px 20px 28px;
+      border-radius: 0 0 24px 24px;
       color: white;
-      margin-bottom: 20px;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-    }
-
-    .hero-slogan {
-      font-size: 1.2rem;
-      font-weight: 600;
       margin-bottom: 16px;
-      letter-spacing: -0.2px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
     }
 
-    .hero-slogan i {
-      font-size: 1.6rem;
+    .hero h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.3;
+      letter-spacing: -0.3px;
     }
 
+    /* Campo de busca estilizado (dentro do hero) */
     .search-box {
       width: 100%;
       background: var(--white);
@@ -109,7 +89,7 @@
       display: flex;
       align-items: center;
       padding: 4px 8px 4px 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
       transition: all 0.2s;
     }
 
@@ -134,9 +114,25 @@
       font-weight: 400;
     }
 
-    /* ========== MAIN CONTENT (AJUSTE) ========== */
+    /* ========== MAIN CONTAINER ========== */
     .main-container {
       padding: 0 16px 24px;
+    }
+
+    /* ========== INDICADOR DE LOCALIZAÇÃO ========== */
+    .local-info {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 8px 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .local-info i {
+      font-size: 1rem;
+      color: var(--primary);
     }
 
     /* ========== CATEGORIAS (MODERNAS) ========== */
@@ -146,7 +142,7 @@
       overflow-x: auto;
       scrollbar-width: thin;
       padding-bottom: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       scroll-snap-type: x mandatory;
     }
 
@@ -173,7 +169,7 @@
       box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
     }
 
-    /* ========== SEÇÃO DESTAQUES (CARDS HORIZONTAIS) ========== */
+    /* ========== DESTAQUES (HORIZONTAL) ========== */
     .destaques-section {
       margin-bottom: 28px;
     }
@@ -296,14 +292,18 @@
       }
     }
 
-    /* ========== CARDS MODERNOS (REDESIGN) ========== */
+    /* ========== CARDS MODERNOS COM FEEDBACK TOUCH ========== */
     .card-comercio {
       background: var(--white);
       border-radius: 24px;
       overflow: hidden;
       box-shadow: var(--shadow-sm);
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       position: relative;
+    }
+
+    .card-comercio:active {
+      transform: scale(0.98);
     }
 
     .card-comercio:hover {
@@ -462,7 +462,7 @@
       font-weight: 700;
     }
 
-    /* ========== PERFIL (MESMA FUNCIONALIDADE) ========== */
+    /* ========== PERFIL ========== */
     .perfil-container {
       background: var(--white);
       border-radius: 28px;
@@ -515,49 +515,41 @@
       margin-top: 20px;
     }
 
-    /* micro interações e ajustes */
+    /* micro interações */
     button, .btn-wpp, .cat-btn, .nav-item {
       cursor: pointer;
       transition: all 0.2s ease;
-    }
-
-    /* Garantir que todos os toques tenham área mínima */
-    .btn-fav, .nav-item, .cat-btn, .btn-wpp {
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER BRANCO COM LOGO CENTRALIZADA (expandida) -->
+  <!-- HEADER BRANCO COM LOGO CENTRALIZADA E AMPLIADA -->
   <header class="header">
-    <div class="logo-link">
-      <img class="app-logo" 
-           src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
-           alt="AquiTem Logo"
-           loading="eager"
-           onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
-    </div>
-    <div class="header-actions"></div> <!-- espaçador para manter simetria -->
+    <img class="app-logo" 
+         src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
+         alt="AquiTem Logo"
+         loading="eager"
+         onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
   </header>
 
-  <!-- HERO COM GRADIENTE + BUSCA (Nova experiência) -->
+  <!-- SEÇÃO HERO (GRADIENTE + SLOGAN + BUSCA) -->
   <div class="hero">
-    <div class="hero-slogan">
-      <i class="material-icons">storefront</i>
-      <span>Tudo do seu bairro, em um só lugar</span>
-    </div>
+    <h1>Tudo do seu bairro,<br>em um só lugar</h1>
     <div class="search-box">
       <i class="material-icons">search</i>
       <input type="text" id="searchInput" placeholder="Buscar comércio, serviço ou produto..." class="search-input">
     </div>
   </div>
 
-  <!-- CONTEÚDO PRINCIPAL (mantém estrutura de classes) -->
+  <!-- CONTEÚDO PRINCIPAL -->
   <main class="main-container" id="mainContent">
+    <!-- INDICADOR DE LOCALIZAÇÃO -->
+    <div class="local-info">
+      <i class="material-icons">location_on</i>
+      <span>João Pessoa - PB</span>
+    </div>
+
     <!-- Categorias -->
     <div class="categories-bar" id="categoriesBar">
       <button class="cat-btn active" data-cat="all">Todos</button>
