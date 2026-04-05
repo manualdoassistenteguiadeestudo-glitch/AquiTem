@@ -37,7 +37,7 @@
       padding-bottom: 80px;
     }
 
-    /* ========== HEADER AQUI TEM ========== */
+    /* ========== HEADER ========== */
     .header {
       background: #ffffff;
       padding: 18px 16px 12px;
@@ -202,6 +202,18 @@
       margin-top: 6px;
     }
 
+    .promo-urgencia {
+      font-size: 0.7rem;
+      background: #fff3e0;
+      color: #e67e22;
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 6px;
+      margin-left: 6px;
+      font-weight: 600;
+    }
+
     /* ========== HERO ========== */
     .hero {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -327,8 +339,8 @@
       border-color: var(--primary);
     }
 
-    /* ========== DESTAQUES ========== */
-    .destaques-section {
+    /* ========== DESTAQUES + POPULARES + RECOMENDADOS ========== */
+    .destaques-section, .populares-section, .recomendados-section {
       margin-bottom: 28px;
     }
 
@@ -345,7 +357,7 @@
       color: var(--secondary);
     }
 
-    .destaques-horizontal {
+    .destaques-horizontal, .populares-horizontal, .recomendados-horizontal {
       display: flex;
       gap: 16px;
       overflow-x: auto;
@@ -353,7 +365,7 @@
       scroll-snap-type: x mandatory;
     }
 
-    .card-destaque {
+    .card-destaque, .card-popular, .card-recomendado {
       flex: 0 0 260px;
       background: var(--white);
       border-radius: 20px;
@@ -363,28 +375,28 @@
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .card-destaque:hover {
+    .card-destaque:hover, .card-popular:hover, .card-recomendado:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-md);
     }
 
-    .card-destaque img {
+    .card-destaque img, .card-popular img, .card-recomendado img {
       width: 100%;
       height: 140px;
       object-fit: cover;
     }
 
-    .destaque-info {
+    .destaque-info, .popular-info, .recomendado-info {
       padding: 12px;
     }
 
-    .destaque-info h4 {
+    .destaque-info h4, .popular-info h4, .recomendado-info h4 {
       font-size: 1rem;
       font-weight: 700;
       margin-bottom: 4px;
     }
 
-    .destaque-info p {
+    .destaque-info p, .popular-info p, .recomendado-info p {
       font-size: 0.7rem;
       color: var(--text-muted);
     }
@@ -456,7 +468,7 @@
       border-radius: 24px;
       overflow: hidden;
       box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       position: relative;
     }
 
@@ -529,6 +541,14 @@
       line-height: 1.4;
     }
 
+    .card-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
     .card-actions {
       display: flex;
       justify-content: space-between;
@@ -550,13 +570,16 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.15s ease;
       text-decoration: none;
+    }
+
+    .btn-wpp:active {
+      transform: scale(0.95);
     }
 
     .btn-wpp:hover {
       background: #128C7E;
-      transform: scale(0.96);
     }
 
     .btn-fav {
@@ -569,17 +592,38 @@
       justify-content: center;
       padding: 10px;
       border-radius: 50%;
-      transition: 0.2s;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-fav:active {
+      transform: scale(1.15);
     }
 
     .btn-fav i {
       font-size: 1.8rem;
+      transition: color 0.2s;
     }
 
     .btn-fav.favoritado i {
       color: #ef4444;
       font-variation-settings: 'FILL' 1;
     }
+
+    .btn-mapa {
+      background: #0A3D62;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-mapa:active { transform: scale(0.95); }
 
     /* ========== BOTTOM NAV ========== */
     .bottom-nav {
@@ -622,7 +666,7 @@
       font-weight: 700;
     }
 
-    /* ========== PERFIL (SOBRE NÓS) ========== */
+    /* ========== PERFIL ========== */
     .perfil-container {
       background: var(--white);
       border-radius: 28px;
@@ -713,7 +757,7 @@
       margin-top: 20px;
     }
 
-    /* ========== SPLASH SCREEN ========== */
+    /* ========== SPLASH ========== */
     #splashScreen {
       position: fixed;
       top: 0;
@@ -760,26 +804,15 @@
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
 <div id="splashScreen">
-  <img class="splash-logo" 
-       src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
-       alt="AquiTem"
-       onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
+  <img class="splash-logo" src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" alt="AquiTem" onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
   <div class="splash-title">Bem-vindo ao AquiTEM!</div>
-  <div class="splash-sub">
-    <span class="splash-highlight">AquiTEM</span> — todo o comércio de João Pessoa, na palma da sua mão.<br>
-    Descubra, explore e confie em comércios reais perto de você.
-  </div>
+  <div class="splash-sub"><span class="splash-highlight">AquiTEM</span> — todo o comércio de João Pessoa, na palma da sua mão.<br>Descubra, explore e confie em comércios reais perto de você.</div>
 </div>
 
 <header class="header">
-  <img class="app-logo" 
-       src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
-       alt="AquiTem"
-       loading="eager"
-       onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
-  <p class="local">📍 João Pessoa - PB</p>
+  <img class="app-logo" src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" alt="AquiTem" loading="eager" onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
+  <p class="local" id="localTexto">📍 João Pessoa - PB</p>
 </header>
 
 <div class="promocoes-section" id="promocoesSection">
@@ -807,7 +840,6 @@
     <button class="cat-btn" data-cat="Farmácia">💊 Farmácia</button>
   </div>
 
-  <!-- FILTRO POR BAIRRO -->
   <div class="bairro-filter">
     <label><i class="material-icons">location_city</i> Bairro:</label>
     <select id="bairroSelect">
@@ -815,12 +847,21 @@
     </select>
   </div>
 
+  <!-- NOVA SEÇÃO: POPULARES NO SEU BAIRRO -->
+  <div id="popularesSection" class="populares-section" style="display: none;">
+    <div class="section-header"><i class="material-icons" style="color: #e67e22;">whatshot</i><h2>🔥 Populares no seu bairro</h2></div>
+    <div id="popularesContainer" class="populares-horizontal"></div>
+  </div>
+
   <div id="destaquesSection" class="destaques-section">
-    <div class="section-header">
-      <i class="material-icons" style="color: #f39c12;">local_fire_department</i>
-      <h2>Destaques da semana</h2>
-    </div>
+    <div class="section-header"><i class="material-icons" style="color: #f39c12;">local_fire_department</i><h2>Destaques da semana</h2></div>
     <div id="destaquesContainer" class="destaques-horizontal"></div>
+  </div>
+
+  <!-- NOVA SEÇÃO: RECOMENDADOS PARA VOCÊ -->
+  <div id="recomendadosSection" class="recomendados-section" style="display: none;">
+    <div class="section-header"><i class="material-icons" style="color: #9b59b6;">star</i><h2>⭐ Recomendado para você</h2></div>
+    <div id="recomendadosContainer" class="recomendados-horizontal"></div>
   </div>
 
   <div class="list-header">
@@ -840,16 +881,11 @@
 </nav>
 
 <script>
-  // ========== FUNÇÃO UTILITÁRIA PARA IMAGENS DO GOOGLE DRIVE ==========
-  // Recebe o ID do arquivo do Google Drive e retorna a URL direta para uso em <img>
-  // Exemplo de uso: getGoogleDriveImageUrl('1KtUnhPyWtadyyLt5p5aTMRsAb4JGaNIa')
-  // IMPORTANTE: O arquivo precisa estar compartilhado como "Qualquer pessoa com o link pode visualizar"
   function getGoogleDriveImageUrl(fileId) {
     if (!fileId) return null;
     return `https://drive.google.com/uc?export=view&id=${fileId}`;
   }
 
-  // ========== LISTA DE BAIRROS (FORNECIDA PELO USUÁRIO) ==========
   const bairrosJoaoPessoa = [
     "Aeroclube", "Água Fria", "Altiplano Cabo Branco", "Alto do Céu", "Alto do Mateus", "Anatólia", "Bancários",
     "Barra de Gramame", "Bessa", "Brisamar", "Cabo Branco", "Castelo Branco", "Centro", "Cidade dos Colibris",
@@ -863,19 +899,16 @@
     "Valentina Figueiredo", "Varadouro", "Varjão"
   ];
 
-  // ========== DADOS DOS COMÉRCIOS (PADRONIZADOS E FÁCEIS DE ALTERAR) ==========
-  // Para ADICIONAR um novo comércio, basta inserir um novo objeto neste array seguindo o modelo abaixo.
-  // Para ALTERAR uma imagem, mude o valor de "imageId" (ID do Google Drive) ou a URL em "imagem" diretamente.
-  // Campo "imagem" tem prioridade sobre "imageId" se ambos existirem.
+  // ========== COMÉRCIOS ==========
+  // IMPORTANTE: Para a Óticas Day, foi adicionada a imagem direta do GitHub.
+  // Substitua a URL abaixo pelo link real do arquivo "1.Oticas Day.png" no seu repositório.
   const comercios = [
     {
       id: 1,
       nome: "Óticas Day",
       categoria: "Serviços",
-      // Opção 1: usar ID do Google Drive (mais fácil de trocar)
-      imageId: "1KtUnhPyWtadyyLt5p5aTMRsAb4JGaNIa",
-      // Opção 2: usar URL direta (se preferir, descomente e comente a linha acima)
-      // imagem: "https://drive.google.com/uc?export=view&id=1KtUnhPyWtadyyLt5p5aTMRsAb4JGaNIa",
+      imagem: "https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/1.Oticas%20Day.png", // <-- TROQUE PELA URL REAL DO GITHUB
+      // imageId: "1KtUnhPyWtadyyLt5p5aTMRsAb4JGaNIa", // comentado para usar a imagem do GitHub
       whatsapp: "558389124525",
       verificado: true,
       destaque: true,
@@ -911,7 +944,7 @@
       id: 4,
       nome: "Kasa do Keijo",
       categoria: "Mercados",
-      imageId: "1TReBBs78q2ClvzV0aD1Q-7gmkNW-xFp_",
+      imageId: "https://cdn.awsli.com.br/2185/2185383/arquivos/whatsapp-image-2020-09-03-at-16-11-39.jpg",
       whatsapp: "5583555555555",
       verificado: true,
       destaque: true,
@@ -945,22 +978,18 @@
     }
   ];
 
-  // Função para obter a URL final da imagem de cada comércio
   function getImagemComercio(comercio) {
-    if (comercio.imagem) return comercio.imagem; // URL direta, se existir
+    if (comercio.imagem) return comercio.imagem;
     if (comercio.imageId) return getGoogleDriveImageUrl(comercio.imageId);
-    // Fallback: placeholder com o nome
     return `https://placehold.co/600x400/2ECC71/white?text=${encodeURIComponent(comercio.nome)}`;
   }
 
-  // ========== VARIÁVEIS GLOBAIS ==========
   let favoritos = JSON.parse(localStorage.getItem('aquiTem_favoritos')) || [];
   let activeTab = 'inicio';
   let activeCategory = 'all';
   let selectedBairro = 'all';
   let searchTerm = '';
 
-  // Elementos DOM
   const searchInput = document.getElementById('searchInput');
   const gridContainer = document.getElementById('comerciosGrid');
   const emptyMsg = document.getElementById('emptyMessage');
@@ -968,8 +997,8 @@
   const resultCountSpan = document.getElementById('resultCount');
   const destaquesContainer = document.getElementById('destaquesContainer');
   const bairroSelect = document.getElementById('bairroSelect');
+  const localTexto = document.getElementById('localTexto');
 
-  // Popular select de bairros
   function popularBairrosSelect() {
     bairroSelect.innerHTML = '<option value="all">📌 Todos os bairros</option>';
     bairrosJoaoPessoa.forEach(bairro => {
@@ -981,11 +1010,7 @@
   }
   popularBairrosSelect();
 
-  // Salvar favoritos
-  function salvarFavoritos() {
-    localStorage.setItem('aquiTem_favoritos', JSON.stringify(favoritos));
-  }
-
+  function salvarFavoritos() { localStorage.setItem('aquiTem_favoritos', JSON.stringify(favoritos)); }
   function toggleFavorito(id) {
     if (favoritos.includes(id)) favoritos = favoritos.filter(favId => favId !== id);
     else favoritos.push(id);
@@ -993,273 +1018,207 @@
     renderizar();
   }
 
-  // Filtro combinado
+  // ORDENAÇÃO INTELIGENTE (destaques primeiro)
   function getComerciosFiltrados() {
     let lista = [];
-    if (activeTab === 'favoritos') {
-      lista = comercios.filter(c => favoritos.includes(c.id));
-    } else {
-      lista = [...comercios];
-    }
+    if (activeTab === 'favoritos') lista = comercios.filter(c => favoritos.includes(c.id));
+    else lista = [...comercios];
 
-    if (activeCategory !== 'all') {
-      lista = lista.filter(c => c.categoria === activeCategory);
-    }
-
-    if (selectedBairro !== 'all') {
-      lista = lista.filter(c => c.bairro === selectedBairro);
-    }
-
+    if (activeCategory !== 'all') lista = lista.filter(c => c.categoria === activeCategory);
+    if (selectedBairro !== 'all') lista = lista.filter(c => c.bairro === selectedBairro);
     if (searchTerm.trim() !== '') {
       const term = searchTerm.toLowerCase();
-      lista = lista.filter(c =>
-        c.nome.toLowerCase().includes(term) ||
-        c.categoria.toLowerCase().includes(term) ||
-        c.descricao.toLowerCase().includes(term) ||
-        (c.bairro && c.bairro.toLowerCase().includes(term))
-      );
+      lista = lista.filter(c => c.nome.toLowerCase().includes(term) || c.categoria.toLowerCase().includes(term) || c.descricao.toLowerCase().includes(term) || (c.bairro && c.bairro.toLowerCase().includes(term)));
     }
+    // Ordenação: destaque primeiro
+    lista.sort((a, b) => {
+      if (a.destaque && !b.destaque) return -1;
+      if (!a.destaque && b.destaque) return 1;
+      return 0;
+    });
     return lista;
   }
 
+  function getDistanciaSimulada() { return (Math.random() * 4.5 + 0.5).toFixed(1) + " km"; }
+  function getVisualizacoes() { return Math.floor(Math.random() * 45) + 5; }
+
   function renderizarComercios() {
     const filtrados = getComerciosFiltrados();
-    if (filtrados.length === 0) {
-      gridContainer.style.display = 'none';
-      emptyMsg.style.display = 'block';
-      resultCountSpan.innerText = '0 resultados';
-      return;
-    }
-    gridContainer.style.display = 'grid';
-    emptyMsg.style.display = 'none';
+    if (filtrados.length === 0) { gridContainer.style.display = 'none'; emptyMsg.style.display = 'block'; resultCountSpan.innerText = '0 resultados'; return; }
+    gridContainer.style.display = 'grid'; emptyMsg.style.display = 'none';
     resultCountSpan.innerText = `${filtrados.length} ${filtrados.length === 1 ? 'resultado' : 'resultados'}`;
-
     gridContainer.innerHTML = '';
     filtrados.forEach(comercio => {
       const isFavorito = favoritos.includes(comercio.id);
-      const card = document.createElement('div');
-      card.className = 'card-comercio';
-
+      const distancia = getDistanciaSimulada();
+      const views = getVisualizacoes();
       let badgesHtml = '';
       if (comercio.verificado) badgesHtml += `<span class="badge-verified"><i class="material-icons" style="font-size:0.8rem;">verified</i> Verificado</span>`;
       if (comercio.destaque) badgesHtml += `<span class="badge-destaque"><i class="material-icons" style="font-size:0.8rem;">local_fire_department</i> Destaque</span>`;
-
-      // Botões de mapa (somente se endereco existir)
-      let mapButtonsHtml = '';
-      if (comercio.endereco) {
-        const encodedEndereco = encodeURIComponent(comercio.endereco);
-        mapButtonsHtml = `
-          <a href="https://www.google.com/maps/search/?api=1&query=${encodedEndereco}" 
-             target="_blank" 
-             class="btn-wpp" 
-             style="background:#0A3D62;">
-            <i class="material-icons">location_on</i> Ver no mapa
-          </a>
-          <a href="https://www.google.com/maps/dir/?api=1&destination=${encodedEndereco}" 
-             target="_blank" 
-             class="btn-wpp" 
-             style="background:#f39c12;">
-            <i class="material-icons">directions</i> Como chegar
-          </a>
-        `;
-      }
-
-      // Obter URL da imagem usando a função auxiliar
       const imagemUrl = getImagemComercio(comercio);
-
+      const mapaLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(comercio.nome + " João Pessoa")}`;
+      const card = document.createElement('div');
+      card.className = 'card-comercio';
       card.innerHTML = `
-        <img class="card-img" src="${imagemUrl}" alt="${comercio.nome}" loading="lazy" 
-             onerror="this.onerror=null; this.src='https://placehold.co/600x400/2ECC71/white?text=${encodeURIComponent(comercio.nome)}'">
+        <img class="card-img" src="${imagemUrl}" alt="${comercio.nome}" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/600x400/2ECC71/white?text=${encodeURIComponent(comercio.nome)}'">
         <div class="card-badges">${badgesHtml}</div>
         <div class="card-content">
           <h3>${comercio.nome}</h3>
           <span class="categoria-tag">${comercio.categoria}</span>
+          <div class="card-stats"><span>📍 ${distancia} de você</span><span>👀 ${views} pessoas viram hoje</span></div>
           <p class="descricao">${comercio.descricao.substring(0, 100)}${comercio.descricao.length > 100 ? '…' : ''}</p>
           <div class="card-actions">
-            <a href="https://wa.me/${comercio.whatsapp}?text=Olá! Vi o anúncio no AquiTem e gostaria de mais informações." target="_blank" class="btn-wpp">
-              <i class="material-icons">whatsapp</i> WhatsApp
-            </a>
-            ${mapButtonsHtml}
-            <button class="btn-fav ${isFavorito ? 'favoritado' : ''}" data-id="${comercio.id}">
-              <i class="material-icons">favorite</i>
-            </button>
+            <a href="https://wa.me/${comercio.whatsapp}?text=Olá! Vi o anúncio no AquiTem e gostaria de mais informações." target="_blank" class="btn-wpp"><i class="material-icons">whatsapp</i> WhatsApp</a>
+            <a href="${mapaLink}" target="_blank" class="btn-mapa"><i class="material-icons">location_on</i> Ver mapa</a>
+            <button class="btn-fav ${isFavorito ? 'favoritado' : ''}" data-id="${comercio.id}"><i class="material-icons">favorite</i></button>
           </div>
         </div>
       `;
       gridContainer.appendChild(card);
     });
-
-    document.querySelectorAll('.btn-fav').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const id = parseInt(btn.dataset.id);
-        toggleFavorito(id);
-      });
-    });
+    document.querySelectorAll('.btn-fav').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const id = parseInt(btn.dataset.id); toggleFavorito(id); }); });
   }
 
   function renderizarDestaques() {
-    if (activeTab !== 'inicio') {
-      document.getElementById('destaquesSection').style.display = 'none';
-      return;
-    }
+    if (activeTab !== 'inicio') { document.getElementById('destaquesSection').style.display = 'none'; return; }
     document.getElementById('destaquesSection').style.display = 'block';
     const destaquesItens = comercios.filter(c => c.destaque === true);
-    if (destaquesItens.length === 0) {
-      destaquesContainer.innerHTML = '<p style="padding:1rem; background:white; border-radius:20px;">Nenhum destaque no momento</p>';
-      return;
-    }
+    if (destaquesItens.length === 0) { destaquesContainer.innerHTML = '<p style="padding:1rem;">Nenhum destaque</p>'; return; }
     destaquesContainer.innerHTML = '';
     destaquesItens.forEach(item => {
-      const imagemUrl = getImagemComercio(item);
-      const card = document.createElement('div');
-      card.className = 'card-destaque';
-      card.innerHTML = `
-        <img src="${imagemUrl}" alt="${item.nome}" onerror="this.onerror=null; this.src='https://placehold.co/600x400/2ECC71/white?text=Destaque'">
-        <div class="destaque-info">
-          <h4>${item.nome}</h4>
-          <p>${item.categoria} • ${item.bairro}</p>
-          <a href="https://wa.me/${item.whatsapp}?text=Olá! Vi o destaque no AquiTem e quero saber mais." target="_blank" class="wpp-mini">
-            <i class="material-icons">whatsapp</i> Contato
-          </a>
-        </div>
-      `;
+      const card = document.createElement('div'); card.className = 'card-destaque';
+      card.innerHTML = `<img src="${getImagemComercio(item)}" alt="${item.nome}" onerror="this.src='https://placehold.co/600x400/2ECC71/white?text=Destaque'"><div class="destaque-info"><h4>${item.nome}</h4><p>${item.categoria} • ${item.bairro}</p><a href="https://wa.me/${item.whatsapp}?text=Olá! Vi o destaque no AquiTem." target="_blank" class="wpp-mini"><i class="material-icons">whatsapp</i> Contato</a></div>`;
       destaquesContainer.appendChild(card);
     });
   }
 
-  // TELA SOBRE NÓS
+  // POPULARES NO SEU BAIRRO
+  function renderizarPopulares() {
+    const section = document.getElementById('popularesSection');
+    const container = document.getElementById('popularesContainer');
+    if (activeTab !== 'inicio' || selectedBairro === 'all') { section.style.display = 'none'; return; }
+    const populares = comercios.filter(c => c.bairro === selectedBairro && c.destaque === true);
+    if (populares.length === 0) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+    container.innerHTML = '';
+    populares.forEach(item => {
+      const card = document.createElement('div'); card.className = 'card-popular';
+      card.innerHTML = `<img src="${getImagemComercio(item)}" alt="${item.nome}"><div class="popular-info"><h4>${item.nome}</h4><p>${item.categoria}</p><a href="https://wa.me/${item.whatsapp}" target="_blank" class="wpp-mini"><i class="material-icons">whatsapp</i> Pedir</a></div>`;
+      container.appendChild(card);
+    });
+  }
+
+  // RECOMENDADOS baseado nas categorias favoritadas
+  function getCategoriasFavoritadas() {
+    const favComercios = comercios.filter(c => favoritos.includes(c.id));
+    const catCount = {};
+    favComercios.forEach(c => { catCount[c.categoria] = (catCount[c.categoria] || 0) + 1; });
+    return Object.keys(catCount).sort((a,b) => catCount[b] - catCount[a]);
+  }
+  function renderizarRecomendados() {
+    const section = document.getElementById('recomendadosSection');
+    const container = document.getElementById('recomendadosContainer');
+    if (activeTab !== 'inicio' || favoritos.length === 0) { section.style.display = 'none'; return; }
+    const categoriasFav = getCategoriasFavoritadas();
+    if (categoriasFav.length === 0) { section.style.display = 'none'; return; }
+    let recomendados = [];
+    for (let cat of categoriasFav) {
+      const naoFavoritados = comercios.filter(c => c.categoria === cat && !favoritos.includes(c.id));
+      recomendados.push(...naoFavoritados);
+      if (recomendados.length >= 4) break;
+    }
+    if (recomendados.length === 0) { section.style.display = 'none'; return; }
+    recomendados = recomendados.slice(0, 4);
+    section.style.display = 'block';
+    container.innerHTML = '';
+    recomendados.forEach(item => {
+      const card = document.createElement('div'); card.className = 'card-recomendado';
+      card.innerHTML = `<img src="${getImagemComercio(item)}" alt="${item.nome}"><div class="recomendado-info"><h4>${item.nome}</h4><p>${item.categoria}</p><a href="https://wa.me/${item.whatsapp}" target="_blank" class="wpp-mini"><i class="material-icons">whatsapp</i> Conversar</a></div>`;
+      container.appendChild(card);
+    });
+  }
+
   function renderizarSobreNos() {
     gridContainer.style.display = 'block';
-    gridContainer.innerHTML = `
-      <div class="perfil-container">
-        <div class="perfil-avatar"><i class="material-icons">info</i></div>
-        <h3>Sobre Nós</h3>
-        <div class="sobre-texto">
-          <p>O <strong>AquiTEM</strong> nasceu de uma experiência real — e de um problema cada vez mais comum: a falta de confiança nas compras online com comércios locais.</p>
-          <p>Após vivenciar um golpe ao comprar um produto de um estabelecimento inexistente, surgiu a necessidade de criar algo diferente. Não apenas mais um aplicativo de busca ou delivery, mas uma plataforma com um propósito claro: <strong>garantir que o comércio seja real antes mesmo do primeiro contato</strong>.</p>
-          <p>Foi assim que nasceu o <strong>AquiTEM</strong>.</p>
-          
-          <div class="missao-box">
-            <h4>🎯 Nossa Missão</h4>
-            <p>Proteger consumidores e valorizar o comércio local legítimo.</p>
-          </div>
-          
-          <p><strong>O que fazemos:</strong> Cada estabelecimento passa por um processo de verificação, incluindo validação de endereço, contato e, quando possível, verificação física.</p>
-          <p>👉 <strong>Se está no AquiTEM, é porque existe.</strong></p>
-          
-          <div class="valores-lista">
-            <li><i class="material-icons">verified</i> Confiança é mais importante que conveniência</li>
-            <li><i class="material-icons">security</i> Segurança vem antes da escolha</li>
-            <li><i class="material-icons">storefront</i> O comércio local merece ser valorizado</li>
-            <li><i class="material-icons">devices</i> A tecnologia deve proteger o usuário</li>
-          </div>
-          
-          <div class="diferencial-box">
-            <h4>✨ Nosso diferencial</h4>
-            <p>Somos uma rede de verificação e confiança.</p>
-          </div>
-          
-          <p><strong>Nossa visão:</strong> Ser referência na validação de comércios no Brasil.</p>
-          <p><strong>AquiTEM é mais do que um aplicativo:</strong><br>
-          É uma ferramenta de proteção.<br>
-          É um novo jeito de confiar.</p>
-        </div>
-      </div>
-    `;
-    emptyMsg.style.display = 'none';
-    resultCountSpan.innerText = '';
-    listTitle.innerText = 'Sobre Nós';
+    gridContainer.innerHTML = `<div class="perfil-container"><div class="perfil-avatar"><i class="material-icons">info</i></div><h3>Sobre Nós</h3><div class="sobre-texto"><p>O <strong>AquiTEM</strong> nasceu de uma experiência real — e de um problema cada vez mais comum: a falta de confiança nas compras online com comércios locais.</p><p>Após vivenciar um golpe, surgiu a necessidade de criar algo diferente. <strong>Garantir que o comércio seja real antes mesmo do primeiro contato</strong>.</p><div class="missao-box"><h4>🎯 Nossa Missão</h4><p>Proteger consumidores e valorizar o comércio local legítimo.</p></div><p>👉 <strong>Se está no AquiTEM, é porque existe.</strong></p><div class="valores-lista"><li><i class="material-icons">verified</i> Confiança é mais importante que conveniência</li><li><i class="material-icons">security</i> Segurança vem antes da escolha</li><li><i class="material-icons">storefront</i> O comércio local merece ser valorizado</li></div><div class="diferencial-box"><h4>✨ Nosso diferencial</h4><p>Somos uma rede de verificação e confiança.</p></div><p><strong>AquiTEM é mais do que um aplicativo:</strong> É uma ferramenta de proteção. É um novo jeito de confiar.</p></div></div>`;
+    emptyMsg.style.display = 'none'; resultCountSpan.innerText = ''; listTitle.innerText = 'Sobre Nós';
   }
 
   function renderizar() {
-    if (activeTab === 'perfil') {
-      renderizarSobreNos();
-      return;
-    }
+    if (activeTab === 'perfil') { renderizarSobreNos(); document.getElementById('popularesSection').style.display = 'none'; document.getElementById('recomendadosSection').style.display = 'none'; document.getElementById('destaquesSection').style.display = 'none'; return; }
     if (activeTab === 'favoritos') listTitle.innerText = 'Meus Favoritos';
     else if (activeTab === 'buscar') listTitle.innerText = 'Resultados da busca';
     else listTitle.innerText = 'Comércios parceiros';
     renderizarComercios();
-    renderizarDestaques();
+    if (activeTab === 'inicio') {
+      renderizarDestaques();
+      renderizarPopulares();
+      renderizarRecomendados();
+    } else {
+      document.getElementById('destaquesSection').style.display = 'none';
+      document.getElementById('popularesSection').style.display = 'none';
+      document.getElementById('recomendadosSection').style.display = 'none';
+    }
   }
 
-  // Eventos
+  // GEOLOCALIZAÇÃO
+  function detectarLocalizacao() {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // Simulação: define bairro como Bancários (exemplo)
+        const bairroDetectado = "Bancários";
+        if (bairrosJoaoPessoa.includes(bairroDetectado)) {
+          selectedBairro = bairroDetectado;
+          bairroSelect.value = bairroDetectado;
+          localTexto.innerHTML = `📍 Perto de você • ${bairroDetectado}`;
+          renderizar();
+        } else {
+          localTexto.innerHTML = `📍 João Pessoa - PB`;
+        }
+      },
+      (error) => { console.log("Localização negada ou erro"); localTexto.innerHTML = `📍 João Pessoa - PB`; }
+    );
+  }
+
+  // REDUÇÃO DE ESFORÇO
+  searchInput.addEventListener('input', (e) => { searchTerm = e.target.value; if (searchTerm) activeCategory = 'all'; document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active')); document.querySelector('.cat-btn[data-cat="all"]').classList.add('active'); renderizar(); });
+  bairroSelect.addEventListener('change', (e) => { selectedBairro = e.target.value; searchTerm = ''; searchInput.value = ''; renderizar(); });
+
   function initEventListeners() {
-    searchInput.addEventListener('input', (e) => { searchTerm = e.target.value; renderizar(); });
-    bairroSelect.addEventListener('change', (e) => { selectedBairro = e.target.value; renderizar(); });
     document.querySelectorAll('.cat-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeCategory = btn.dataset.cat;
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderizar();
-      });
+      btn.addEventListener('click', () => { activeCategory = btn.dataset.cat; document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderizar(); });
     });
     document.querySelectorAll('.nav-item').forEach(item => {
-      item.addEventListener('click', () => {
-        activeTab = item.dataset.tab;
-        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-        item.classList.add('active');
-        renderizar();
-      });
+      item.addEventListener('click', () => { activeTab = item.dataset.tab; document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active')); item.classList.add('active'); renderizar(); });
     });
   }
 
-  // Carrossel de promoções com autoplay
+  // PROMOÇÕES COM URGÊNCIA
   const promocoes = [
-    { nome: "Hambúrguer + Batata", preco: "R$ 19,90", imagem: "https://placehold.co/600x400/FFB347/white?text=Hambúrguer", tag: "🔥 Hoje" },
-    { nome: "Pizza Grande (8 fatias)", preco: "R$ 29,90", imagem: "https://placehold.co/600x400/FF6B6B/white?text=Pizza", tag: "🎉 Promoção" },
-    { nome: "Refrigerante 2L", preco: "R$ 7,90", imagem: "https://placehold.co/600x400/4ECDC4/white?text=Refri", tag: "💸 Oferta" },
-    { nome: "Combo Acai 500ml", preco: "R$ 12,90", imagem: "https://placehold.co/600x400/9B59B6/white?text=Açaí", tag: "🥣 Do dia" },
-    { nome: "Coxinha + Suco", preco: "R$ 9,90", imagem: "https://placehold.co/600x400/E67E22/white?text=Coxinha", tag: "⭐ Lanche Rápido" }
+    { nome: "Hambúrguer + Batata", preco: "R$ 19,90", imagem: "https://placehold.co/600x400/FFB347/white?text=Hambúrguer", tag: "🔥 Hoje", urgencia: "⏱️ Só hoje" },
+    { nome: "Pizza Grande (8 fatias)", preco: "R$ 29,90", imagem: "https://placehold.co/600x400/FF6B6B/white?text=Pizza", tag: "🎉 Promoção", urgencia: "⏱️ Até 18h" },
+    { nome: "Refrigerante 2L", preco: "R$ 7,90", imagem: "https://placehold.co/600x400/4ECDC4/white?text=Refri", tag: "💸 Oferta", urgencia: "⏱️ Estoque limitado" },
+    { nome: "Combo Acai 500ml", preco: "R$ 12,90", imagem: "https://placehold.co/600x400/9B59B6/white?text=Açaí", tag: "🥣 Do dia", urgencia: "⏱️ Até 20h" },
+    { nome: "Coxinha + Suco", preco: "R$ 9,90", imagem: "https://placehold.co/600x400/E67E22/white?text=Coxinha", tag: "⭐ Lanche Rápido", urgencia: "⏱️ Só hoje" }
   ];
   const carouselPromo = document.getElementById('carouselPromocoes');
-  let autoplayInterval;
-  let isAutoPlaying = true;
-  function startAutoplay() {
-    if (autoplayInterval) clearInterval(autoplayInterval);
-    if (!carouselPromo || promocoes.length === 0) return;
-    autoplayInterval = setInterval(() => {
-      if (!isAutoPlaying || !carouselPromo) return;
-      const cardWidth = 260, gap = 16;
-      const maxScroll = carouselPromo.scrollWidth - carouselPromo.clientWidth;
-      let newLeft = carouselPromo.scrollLeft + (cardWidth + gap);
-      if (newLeft >= maxScroll - 5) newLeft = 0;
-      carouselPromo.scrollTo({ left: newLeft, behavior: 'smooth' });
-    }, 4000);
-    document.getElementById('autoplayStatus').innerText = '▶ Rodando';
-  }
+  let autoplayInterval, isAutoPlaying = true;
+  function startAutoplay() { if (autoplayInterval) clearInterval(autoplayInterval); if (!carouselPromo) return; autoplayInterval = setInterval(() => { if (!isAutoPlaying) return; const cardWidth = 260, gap = 16, maxScroll = carouselPromo.scrollWidth - carouselPromo.clientWidth; let newLeft = carouselPromo.scrollLeft + (cardWidth + gap); if (newLeft >= maxScroll - 5) newLeft = 0; carouselPromo.scrollTo({ left: newLeft, behavior: 'smooth' }); }, 4000); document.getElementById('autoplayStatus').innerText = '▶ Rodando'; }
   function renderizarPromocoes() {
     if (!carouselPromo) return;
     carouselPromo.innerHTML = '';
-    promocoes.forEach(p => {
-      const div = document.createElement('div');
-      div.className = 'promo-card';
-      div.innerHTML = `<img class="promo-img" src="${p.imagem}" alt="${p.nome}"><div class="promo-info"><div class="promo-nome">${p.nome}</div><div class="promo-preco">${p.preco}</div><span class="promo-tag">${p.tag}</span></div>`;
-      carouselPromo.appendChild(div);
-    });
+    promocoes.forEach(p => { const div = document.createElement('div'); div.className = 'promo-card'; div.innerHTML = `<img class="promo-img" src="${p.imagem}" alt="${p.nome}"><div class="promo-info"><div class="promo-nome">${p.nome}</div><div class="promo-preco">${p.preco}</div><span class="promo-tag">${p.tag}</span><span class="promo-urgencia">${p.urgencia}</span></div>`; carouselPromo.appendChild(div); });
     startAutoplay();
   }
-  document.getElementById('autoplayStatus')?.addEventListener('click', () => {
-    if (isAutoPlaying) { isAutoPlaying = false; clearInterval(autoplayInterval); document.getElementById('autoplayStatus').innerText = '⏸ Pausado'; }
-    else { isAutoPlaying = true; startAutoplay(); }
-  });
+  document.getElementById('autoplayStatus')?.addEventListener('click', () => { if (isAutoPlaying) { isAutoPlaying = false; clearInterval(autoplayInterval); document.getElementById('autoplayStatus').innerText = '⏸ Pausado'; } else { isAutoPlaying = true; startAutoplay(); } });
 
-  // Splash screen: remove após 3 segundos
-  setTimeout(() => {
-    const splash = document.getElementById('splashScreen');
-    if (splash) {
-      splash.style.opacity = '0';
-      setTimeout(() => {
-        splash.style.display = 'none';
-      }, 500);
-    }
-  }, 3000);
+  setTimeout(() => { const splash = document.getElementById('splashScreen'); if (splash) { splash.style.opacity = '0'; setTimeout(() => splash.style.display = 'none', 500); } }, 3000);
 
   function init() {
     initEventListeners();
     renderizarPromocoes();
+    detectarLocalizacao();
     renderizar();
   }
   init();
