@@ -534,6 +534,8 @@
       justify-content: space-between;
       align-items: center;
       margin-top: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .btn-wpp {
@@ -544,7 +546,7 @@
       border-radius: 40px;
       font-weight: 700;
       font-size: 0.8rem;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       cursor: pointer;
@@ -805,7 +807,7 @@
     <button class="cat-btn" data-cat="Farmácia">💊 Farmácia</button>
   </div>
 
-  <!-- FILTRO POR BAIRRO (TODOS OS BAIRROS DE JOÃO PESSOA) -->
+  <!-- FILTRO POR BAIRRO -->
   <div class="bairro-filter">
     <label><i class="material-icons">location_city</i> Bairro:</label>
     <select id="bairroSelect">
@@ -838,7 +840,16 @@
 </nav>
 
 <script>
-  // ========== LISTA COMPLETA DE BAIRROS (FORNECIDA PELO USUÁRIO) ==========
+  // ========== FUNÇÃO UTILITÁRIA PARA IMAGENS DO GOOGLE DRIVE ==========
+  // Recebe o ID do arquivo do Google Drive e retorna a URL direta para uso em <img>
+  // Exemplo de uso: getGoogleDriveImageUrl('1KtUnhPyWtadyyLt5p5aTMRsAb4JGaNIa')
+  // IMPORTANTE: O arquivo precisa estar compartilhado como "Qualquer pessoa com o link pode visualizar"
+  function getGoogleDriveImageUrl(fileId) {
+    if (!fileId) return null;
+    return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  }
+
+  // ========== LISTA DE BAIRROS (FORNECIDA PELO USUÁRIO) ==========
   const bairrosJoaoPessoa = [
     "Aeroclube", "Água Fria", "Altiplano Cabo Branco", "Alto do Céu", "Alto do Mateus", "Anatólia", "Bancários",
     "Barra de Gramame", "Bessa", "Brisamar", "Cabo Branco", "Castelo Branco", "Centro", "Cidade dos Colibris",
@@ -852,76 +863,97 @@
     "Valentina Figueiredo", "Varadouro", "Varjão"
   ];
 
-  // ========== DADOS DOS COMÉRCIOS (COM IMAGENS CORRIGIDAS E BAIRROS ATRIBUÍDOS) ==========
+  // ========== DADOS DOS COMÉRCIOS (PADRONIZADOS E FÁCEIS DE ALTERAR) ==========
+  // Para ADICIONAR um novo comércio, basta inserir um novo objeto neste array seguindo o modelo abaixo.
+  // Para ALTERAR uma imagem, mude o valor de "imageId" (ID do Google Drive) ou a URL em "imagem" diretamente.
+  // Campo "imagem" tem prioridade sobre "imageId" se ambos existirem.
   const comercios = [
     {
       id: 1,
-      nome: "Mercado do Bairro",
-      categoria: "Mercados",
-      imagem: "https://drive.google.com/uc?export=view&id=1w7lz_hSIVVseyDWSlqFTgYOQD0fleyC0",
-      whatsapp: "5583888888888",
+      nome: "Óticas Day",
+      categoria: "Serviços",
+      // Opção 1: usar ID do Google Drive (mais fácil de trocar)
+      imageId: "1KtUnhPyWtadyyLt5p5aTMRsAb4JGaNIa",
+      // Opção 2: usar URL direta (se preferir, descomente e comente a linha acima)
+      // imagem: "https://drive.google.com/uc?export=view&id=1KtUnhPyWtadyyLt5p5aTMRsAb4JGaNIa",
+      whatsapp: "558389124525",
       verificado: true,
       destaque: true,
       bairro: "Bancários",
-      descricao: "O Mercado do Bairro é a opção ideal para quem busca praticidade, economia e um atendimento próximo e de confiança no dia a dia."
+      endereco: "Óticas Day Bancários João Pessoa PB",
+      descricao: "Na Óticas Day, você encontra o equilíbrio perfeito entre estilo, qualidade e preço. Óculos de grau e solares modernos, com atendimento especializado para cuidar da sua visão com confiança."
     },
     {
       id: 2,
       nome: "Farmácia Popular",
       categoria: "Farmácia",
-      imagem: "https://drive.google.com/uc?export=view&id=10NGiUsDmsMDuN22XqhdXjVdyv-zb4RiT",
+      imageId: "10NGiUsDmsMDuN22XqhdXjVdyv-zb4RiT",
       whatsapp: "5583777777777",
       verificado: true,
       destaque: true,
       bairro: "Centro",
+      endereco: "Farmácia Popular Centro João Pessoa PB",
       descricao: "Medicamentos essenciais a preços acessíveis e atendimento rápido."
     },
     {
       id: 3,
       nome: "Mecânica Rápida",
       categoria: "Serviços",
-      imagem: "https://drive.google.com/uc?export=view&id=1nDce-_7f867PfDxE7ErHClLqg-VQ8Ate",
+      imageId: "1nDce-_7f867PfDxE7ErHClLqg-VQ8Ate",
       whatsapp: "5583666666666",
       verificado: true,
       destaque: true,
       bairro: "Jaguaribe",
+      endereco: "Mecânica Rápida Jaguaribe João Pessoa PB",
       descricao: "Revisão, troca de óleo, freios e diagnósticos."
     },
     {
       id: 4,
       nome: "Kasa do Keijo",
       categoria: "Mercados",
-      imagem: "https://drive.google.com/uc?export=view&id=1TReBBs78q2ClvzV0aD1Q-7gmkNW-xFp_",
+      imageId: "1TReBBs78q2ClvzV0aD1Q-7gmkNW-xFp_",
       whatsapp: "5583555555555",
       verificado: true,
       destaque: true,
       bairro: "Manaíra",
+      endereco: "Kasa do Keijo Manaíra João Pessoa PB",
       descricao: "Hortifrúti orgânico e produtos regionais."
     },
     {
       id: 5,
       nome: "Pet Shop Amigo",
       categoria: "Serviços",
-      imagem: "https://drive.google.com/uc?export=view&id=1ClEf2BMuptQ6630rC-suE68OqtzQ9DTY",
+      imageId: "1ClEf2BMuptQ6630rC-suE68OqtzQ9DTY",
       whatsapp: "5583444444444",
       verificado: false,
       destaque: false,
       bairro: "Cabo Branco",
+      endereco: "Pet Shop Amigo Cabo Branco João Pessoa PB",
       descricao: "Banho, tosa, rações premium e acessórios."
     },
     {
       id: 6,
       nome: "Lanchonete Sabor Caseiro",
       categoria: "Lanches",
-      imagem: "https://drive.google.com/uc?export=view&id=1r2itKtkyxuJyM5oXnfg7G6QZTRtII8_6",
+      imageId: "1r2itKtkyxuJyM5oXnfg7G6QZTRtII8_6",
       whatsapp: "5583333333333",
       verificado: true,
       destaque: false,
       bairro: "Tambauzinho",
+      endereco: "Lanchonete Sabor Caseiro Tambauzinho João Pessoa PB",
       descricao: "Pastéis artesanais, sucos naturais e tapioca."
     }
   ];
 
+  // Função para obter a URL final da imagem de cada comércio
+  function getImagemComercio(comercio) {
+    if (comercio.imagem) return comercio.imagem; // URL direta, se existir
+    if (comercio.imageId) return getGoogleDriveImageUrl(comercio.imageId);
+    // Fallback: placeholder com o nome
+    return `https://placehold.co/600x400/2ECC71/white?text=${encodeURIComponent(comercio.nome)}`;
+  }
+
+  // ========== VARIÁVEIS GLOBAIS ==========
   let favoritos = JSON.parse(localStorage.getItem('aquiTem_favoritos')) || [];
   let activeTab = 'inicio';
   let activeCategory = 'all';
@@ -961,7 +993,7 @@
     renderizar();
   }
 
-  // Filtro combinado (categoria + busca + bairro + favoritos)
+  // Filtro combinado
   function getComerciosFiltrados() {
     let lista = [];
     if (activeTab === 'favoritos') {
@@ -1012,8 +1044,31 @@
       if (comercio.verificado) badgesHtml += `<span class="badge-verified"><i class="material-icons" style="font-size:0.8rem;">verified</i> Verificado</span>`;
       if (comercio.destaque) badgesHtml += `<span class="badge-destaque"><i class="material-icons" style="font-size:0.8rem;">local_fire_department</i> Destaque</span>`;
 
+      // Botões de mapa (somente se endereco existir)
+      let mapButtonsHtml = '';
+      if (comercio.endereco) {
+        const encodedEndereco = encodeURIComponent(comercio.endereco);
+        mapButtonsHtml = `
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodedEndereco}" 
+             target="_blank" 
+             class="btn-wpp" 
+             style="background:#0A3D62;">
+            <i class="material-icons">location_on</i> Ver no mapa
+          </a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${encodedEndereco}" 
+             target="_blank" 
+             class="btn-wpp" 
+             style="background:#f39c12;">
+            <i class="material-icons">directions</i> Como chegar
+          </a>
+        `;
+      }
+
+      // Obter URL da imagem usando a função auxiliar
+      const imagemUrl = getImagemComercio(comercio);
+
       card.innerHTML = `
-        <img class="card-img" src="${comercio.imagem}" alt="${comercio.nome}" loading="lazy" 
+        <img class="card-img" src="${imagemUrl}" alt="${comercio.nome}" loading="lazy" 
              onerror="this.onerror=null; this.src='https://placehold.co/600x400/2ECC71/white?text=${encodeURIComponent(comercio.nome)}'">
         <div class="card-badges">${badgesHtml}</div>
         <div class="card-content">
@@ -1024,6 +1079,7 @@
             <a href="https://wa.me/${comercio.whatsapp}?text=Olá! Vi o anúncio no AquiTem e gostaria de mais informações." target="_blank" class="btn-wpp">
               <i class="material-icons">whatsapp</i> WhatsApp
             </a>
+            ${mapButtonsHtml}
             <button class="btn-fav ${isFavorito ? 'favoritado' : ''}" data-id="${comercio.id}">
               <i class="material-icons">favorite</i>
             </button>
@@ -1055,10 +1111,11 @@
     }
     destaquesContainer.innerHTML = '';
     destaquesItens.forEach(item => {
+      const imagemUrl = getImagemComercio(item);
       const card = document.createElement('div');
       card.className = 'card-destaque';
       card.innerHTML = `
-        <img src="${item.imagem}" alt="${item.nome}" onerror="this.onerror=null; this.src='https://placehold.co/600x400/2ECC71/white?text=Destaque'">
+        <img src="${imagemUrl}" alt="${item.nome}" onerror="this.onerror=null; this.src='https://placehold.co/600x400/2ECC71/white?text=Destaque'">
         <div class="destaque-info">
           <h4>${item.nome}</h4>
           <p>${item.categoria} • ${item.bairro}</p>
@@ -1071,7 +1128,7 @@
     });
   }
 
-  // NOVA FUNÇÃO: TELA SOBRE NÓS (substitui o antigo perfil)
+  // TELA SOBRE NÓS
   function renderizarSobreNos() {
     gridContainer.style.display = 'block';
     gridContainer.innerHTML = `
@@ -1149,7 +1206,7 @@
     });
   }
 
-  // Carrossel de promoções com autoplay (mantido)
+  // Carrossel de promoções com autoplay
   const promocoes = [
     { nome: "Hambúrguer + Batata", preco: "R$ 19,90", imagem: "https://placehold.co/600x400/FFB347/white?text=Hambúrguer", tag: "🔥 Hoje" },
     { nome: "Pizza Grande (8 fatias)", preco: "R$ 29,90", imagem: "https://placehold.co/600x400/FF6B6B/white?text=Pizza", tag: "🎉 Promoção" },
@@ -1189,7 +1246,7 @@
     else { isAutoPlaying = true; startAutoplay(); }
   });
 
-  // ========== SPLASH SCREEN: REMOVER APÓS 3 SEGUNDOS ==========
+  // Splash screen: remove após 3 segundos
   setTimeout(() => {
     const splash = document.getElementById('splashScreen');
     if (splash) {
