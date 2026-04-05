@@ -87,6 +87,123 @@
       margin-top: 10px;
     }
 
+    /* ========== CARROSSEL DE PROMOÇÕES (COM AUTOPLAY) ========== */
+    .promocoes-section {
+      background: var(--white);
+      padding: 16px 0 12px 16px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--gray-light);
+      position: relative;
+    }
+
+    .promo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-right: 16px;
+    }
+
+    .promo-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .autoplay-indicator {
+      font-size: 0.7rem;
+      background: var(--gray-light);
+      padding: 4px 10px;
+      border-radius: 40px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .carousel-promocoes {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      scrollbar-width: thin;
+    }
+
+    .carousel-promocoes:active {
+      cursor: grabbing;
+    }
+
+    .carousel-promocoes::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .carousel-promocoes::-webkit-scrollbar-track {
+      background: var(--gray-light);
+      border-radius: 10px;
+    }
+
+    .carousel-promocoes::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    .promo-card {
+      flex: 0 0 260px;
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      scroll-snap-align: start;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #f0f0f0;
+    }
+
+    .promo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .promo-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      background: #f5f5f5;
+    }
+
+    .promo-info {
+      padding: 12px;
+    }
+
+    .promo-nome {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text-dark);
+    }
+
+    .promo-preco {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 6px 0;
+    }
+
+    .promo-tag {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 40px;
+      margin-top: 6px;
+    }
+
     /* ========== HERO (GRADIENTE + BUSCA) ========== */
     .hero {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -526,7 +643,7 @@
 </head>
 <body>
 
-  <!-- ========== HEADER AQUI TEM (PROFISSIONAL) ========== -->
+  <!-- ========== HEADER AQUI TEM ========== -->
   <header class="header">
     <img class="app-logo" 
          src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
@@ -535,6 +652,15 @@
          onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
     <p class="local">📍 João Pessoa - PB</p>
   </header>
+
+  <!-- CARROSSEL DE PROMOÇÕES COM AUTOPLAY -->
+  <div class="promocoes-section" id="promocoesSection">
+    <div class="promo-header">
+      <h3><i class="material-icons" style="color: #f39c12;">local_offer</i> Ofertas imperdíveis</h3>
+      <span class="autoplay-indicator" id="autoplayStatus">▶ Rodando</span>
+    </div>
+    <div class="carousel-promocoes" id="carouselPromocoes"></div>
+  </div>
 
   <!-- HERO COM GRADIENTE + BUSCA -->
   <div class="hero">
@@ -598,7 +724,7 @@
   </nav>
 
   <script>
-    // ========== DADOS DOS COMÉRCIOS (CORRIGIDO) ==========
+    // ========== DADOS DOS COMÉRCIOS (EXISTENTES) ==========
     const comercios = [
       {
         id: 1,
@@ -682,6 +808,40 @@
       }
     ];
 
+    // ========== ESTRUTURA DE PROMOÇÕES ==========
+    const promocoes = [
+      {
+        nome: "Hambúrguer + Batata",
+        preco: "R$ 19,90",
+        imagem: "https://placehold.co/600x400/FFB347/white?text=Hambúrguer",
+        tag: "🔥 Hoje"
+      },
+      {
+        nome: "Pizza Grande (8 fatias)",
+        preco: "R$ 29,90",
+        imagem: "https://placehold.co/600x400/FF6B6B/white?text=Pizza",
+        tag: "🎉 Promoção"
+      },
+      {
+        nome: "Refrigerante 2L",
+        preco: "R$ 7,90",
+        imagem: "https://placehold.co/600x400/4ECDC4/white?text=Refri",
+        tag: "💸 Oferta"
+      },
+      {
+        nome: "Combo Acai 500ml",
+        preco: "R$ 12,90",
+        imagem: "https://placehold.co/600x400/9B59B6/white?text=Açaí",
+        tag: "🥣 Do dia"
+      },
+      {
+        nome: "Coxinha + Suco",
+        preco: "R$ 9,90",
+        imagem: "https://placehold.co/600x400/E67E22/white?text=Coxinha",
+        tag: "⭐ Lanche Rápido"
+      }
+    ];
+
     let favoritos = JSON.parse(localStorage.getItem('aquiTem_favoritos')) || [];
     let activeTab = 'inicio';
     let activeCategory = 'all';
@@ -694,6 +854,141 @@
     const resultCountSpan = document.getElementById('resultCount');
     const destaquesSection = document.getElementById('destaquesSection');
     const destaquesContainer = document.getElementById('destaquesContainer');
+
+    // ========== AUTOPLAY DO CARROSSEL ==========
+    let autoplayInterval = null;
+    let isAutoPlaying = true;
+    const carousel = document.getElementById('carouselPromocoes');
+    const autoplayStatusSpan = document.getElementById('autoplayStatus');
+
+    function startAutoplay() {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+      if (!carousel || promocoes.length === 0) return;
+      
+      autoplayInterval = setInterval(() => {
+        if (!isAutoPlaying) return;
+        if (!carousel) return;
+        
+        // Largura visível do carrossel + gap
+        const cardWidth = 260; // largura fixa do card
+        const gap = 16;
+        const scrollAmount = cardWidth + gap;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        
+        let newScrollLeft = carousel.scrollLeft + scrollAmount;
+        // Se chegou ao fim, volta para o início (loop suave)
+        if (newScrollLeft >= maxScroll - 5) {
+          newScrollLeft = 0;
+        }
+        
+        carousel.scrollTo({
+          left: newScrollLeft,
+          behavior: 'smooth'
+        });
+      }, 4000); // a cada 4 segundos
+      
+      autoplayStatusSpan.innerText = '▶ Rodando';
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+      autoplayStatusSpan.innerText = '⏸ Pausado';
+    }
+
+    function resetAutoplayTimer() {
+      if (!isAutoPlaying) return;
+      // Para e reinicia o autoplay (quando o usuário interage)
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        startAutoplay();
+      }
+    }
+
+    // Eventos para pausar autoplay durante interação manual
+    function pauseAutoplayTemporarily() {
+      if (!isAutoPlaying) return;
+      stopAutoplay();
+      // Volta a tocar após 10 segundos sem interação
+      setTimeout(() => {
+        if (isAutoPlaying && !autoplayInterval) {
+          startAutoplay();
+        }
+      }, 10000);
+    }
+
+    if (carousel) {
+      // Pausa quando o usuário arrasta ou clica
+      carousel.addEventListener('mousedown', () => {
+        if (isAutoPlaying) stopAutoplay();
+      });
+      carousel.addEventListener('mouseup', () => {
+        if (isAutoPlaying) {
+          setTimeout(() => startAutoplay(), 3000);
+        }
+      });
+      carousel.addEventListener('touchstart', () => {
+        if (isAutoPlaying) stopAutoplay();
+      });
+      carousel.addEventListener('touchend', () => {
+        if (isAutoPlaying) {
+          setTimeout(() => startAutoplay(), 3000);
+        }
+      });
+      // Scroll manual também reseta
+      carousel.addEventListener('scroll', () => {
+        if (isAutoPlaying) {
+          resetAutoplayTimer();
+        }
+      });
+    }
+
+    // ========== RENDERIZAR PROMOÇÕES ==========
+    function renderizarPromocoes() {
+      if (!carousel) return;
+      if (promocoes.length === 0) {
+        carousel.innerHTML = '<p style="padding: 1rem;">Nenhuma promoção ativa no momento.</p>';
+        return;
+      }
+      
+      carousel.innerHTML = '';
+      promocoes.forEach(promo => {
+        const promoCard = document.createElement('div');
+        promoCard.className = 'promo-card';
+        promoCard.innerHTML = `
+          <img class="promo-img" src="${promo.imagem}" alt="${promo.nome}" loading="lazy">
+          <div class="promo-info">
+            <div class="promo-nome">${promo.nome}</div>
+            <div class="promo-preco">${promo.preco}</div>
+            ${promo.tag ? `<span class="promo-tag">${promo.tag}</span>` : ''}
+          </div>
+        `;
+        carousel.appendChild(promoCard);
+      });
+      
+      // Inicia autoplay após renderizar
+      if (isAutoPlaying) {
+        startAutoplay();
+      }
+    }
+
+    // Alternar autoplay (opcional: clicar no indicador pausa/play)
+    if (autoplayStatusSpan) {
+      autoplayStatusSpan.style.cursor = 'pointer';
+      autoplayStatusSpan.addEventListener('click', () => {
+        if (isAutoPlaying) {
+          isAutoPlaying = false;
+          stopAutoplay();
+          autoplayStatusSpan.innerText = '⏸ Pausado';
+        } else {
+          isAutoPlaying = true;
+          startAutoplay();
+          autoplayStatusSpan.innerText = '▶ Rodando';
+        }
+      });
+    }
 
     function salvarFavoritos() {
       localStorage.setItem('aquiTem_favoritos', JSON.stringify(favoritos));
@@ -885,6 +1180,7 @@
 
     function init() {
       initEventListeners();
+      renderizarPromocoes(); // carrega o carrossel e inicia autoplay
       renderizar();
     }
 
