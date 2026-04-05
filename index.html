@@ -37,7 +37,7 @@
       padding-bottom: 80px;
     }
 
-    /* ========== HEADER AQUI TEM (PROFISSIONAL) ========== */
+    /* ========== HEADER AQUI TEM ========== */
     .header {
       background: #ffffff;
       padding: 18px 16px 12px;
@@ -51,7 +51,6 @@
       z-index: 999;
     }
 
-    /* LOGO PRINCIPAL */
     .app-logo {
       height: 80px;
       max-width: 220px;
@@ -67,7 +66,6 @@
       transform: scale(1.02);
     }
 
-    /* LOCALIZAÇÃO */
     .local {
       font-size: 13px;
       color: #666;
@@ -77,7 +75,6 @@
       gap: 4px;
     }
 
-    /* LINHA DE DESTAQUE */
     .header::after {
       content: "";
       width: 50px;
@@ -87,7 +84,7 @@
       margin-top: 10px;
     }
 
-    /* ========== CARROSSEL DE PROMOÇÕES (COM AUTOPLAY) ========== */
+    /* ========== CARROSSEL DE PROMOÇÕES ========== */
     .promocoes-section {
       background: var(--white);
       padding: 16px 0 12px 16px;
@@ -120,6 +117,7 @@
       border-radius: 40px;
       color: var(--text-muted);
       font-weight: 500;
+      cursor: pointer;
     }
 
     .carousel-promocoes {
@@ -204,7 +202,7 @@
       margin-top: 6px;
     }
 
-    /* ========== HERO (GRADIENTE + BUSCA) ========== */
+    /* ========== HERO ========== */
     .hero {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       padding: 24px 20px 28px;
@@ -222,7 +220,6 @@
       letter-spacing: -0.3px;
     }
 
-    /* Campo de busca estilizado */
     .search-box {
       width: 100%;
       background: var(--white);
@@ -231,7 +228,6 @@
       align-items: center;
       padding: 4px 8px 4px 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      transition: all 0.2s;
     }
 
     .search-box i {
@@ -252,7 +248,6 @@
 
     .search-input::placeholder {
       color: #94a3b8;
-      font-weight: 400;
     }
 
     /* ========== MAIN CONTAINER ========== */
@@ -292,6 +287,44 @@
       border-color: var(--primary);
       color: white;
       box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+    }
+
+    /* ========== FILTRO BAIRRO ========== */
+    .bairro-filter {
+      background: white;
+      border-radius: 60px;
+      margin-bottom: 20px;
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #eef2f6;
+    }
+    .bairro-filter label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--secondary);
+      font-size: 0.85rem;
+    }
+    .bairro-filter select {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 40px;
+      border: 1px solid #e2e8f0;
+      background: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: var(--text-dark);
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .bairro-filter select:focus {
+      border-color: var(--primary);
     }
 
     /* ========== DESTAQUES ========== */
@@ -417,7 +450,7 @@
       }
     }
 
-    /* ========== CARDS MODERNOS ========== */
+    /* ========== CARDS ========== */
     .card-comercio {
       background: var(--white);
       border-radius: 24px;
@@ -643,548 +676,404 @@
 </head>
 <body>
 
-  <!-- ========== HEADER AQUI TEM ========== -->
-  <header class="header">
-    <img class="app-logo" 
-         src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
-         alt="AquiTem"
-         loading="eager"
-         onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
-    <p class="local">📍 João Pessoa - PB</p>
-  </header>
+<header class="header">
+  <img class="app-logo" 
+       src="https://lh3.googleusercontent.com/d/1oqsTlc5hL1uxWPjUSXGU1rUWiVVif56r" 
+       alt="AquiTem"
+       loading="eager"
+       onerror="this.onerror=null; this.src='https://placehold.co/200x80/2ECC71/white?text=AquiTem';">
+  <p class="local">📍 João Pessoa - PB</p>
+</header>
 
-  <!-- CARROSSEL DE PROMOÇÕES COM AUTOPLAY -->
-  <div class="promocoes-section" id="promocoesSection">
-    <div class="promo-header">
-      <h3><i class="material-icons" style="color: #f39c12;">local_offer</i> Ofertas imperdíveis</h3>
-      <span class="autoplay-indicator" id="autoplayStatus">▶ Rodando</span>
-    </div>
-    <div class="carousel-promocoes" id="carouselPromocoes"></div>
+<div class="promocoes-section" id="promocoesSection">
+  <div class="promo-header">
+    <h3><i class="material-icons" style="color: #f39c12;">local_offer</i> Ofertas imperdíveis</h3>
+    <span class="autoplay-indicator" id="autoplayStatus">▶ Rodando</span>
+  </div>
+  <div class="carousel-promocoes" id="carouselPromocoes"></div>
+</div>
+
+<div class="hero">
+  <h1>Tudo do seu bairro,<br>em um só lugar</h1>
+  <div class="search-box">
+    <i class="material-icons">search</i>
+    <input type="text" id="searchInput" placeholder="Buscar comércio, serviço ou produto..." class="search-input">
+  </div>
+</div>
+
+<main class="main-container" id="mainContent">
+  <div class="categories-bar" id="categoriesBar">
+    <button class="cat-btn active" data-cat="all">Todos</button>
+    <button class="cat-btn" data-cat="Lanches">🍔 Lanches</button>
+    <button class="cat-btn" data-cat="Mercados">🛒 Mercados</button>
+    <button class="cat-btn" data-cat="Serviços">🛠 Serviços</button>
+    <button class="cat-btn" data-cat="Farmácia">💊 Farmácia</button>
   </div>
 
-  <!-- HERO COM GRADIENTE + BUSCA -->
-  <div class="hero">
-    <h1>Tudo do seu bairro,<br>em um só lugar</h1>
-    <div class="search-box">
-      <i class="material-icons">search</i>
-      <input type="text" id="searchInput" placeholder="Buscar comércio, serviço ou produto..." class="search-input">
-    </div>
+  <!-- FILTRO POR BAIRRO (TODOS OS BAIRROS DE JOÃO PESSOA) -->
+  <div class="bairro-filter">
+    <label><i class="material-icons">location_city</i> Bairro:</label>
+    <select id="bairroSelect">
+      <option value="all">📌 Todos os bairros</option>
+    </select>
   </div>
 
-  <!-- CONTEÚDO PRINCIPAL -->
-  <main class="main-container" id="mainContent">
-    <!-- Categorias -->
-    <div class="categories-bar" id="categoriesBar">
-      <button class="cat-btn active" data-cat="all">Todos</button>
-      <button class="cat-btn" data-cat="Lanches">🍔 Lanches</button>
-      <button class="cat-btn" data-cat="Mercados">🛒 Mercados</button>
-      <button class="cat-btn" data-cat="Serviços">🛠 Serviços</button>
-      <button class="cat-btn" data-cat="Farmácia">💊 Farmácia</button>
-      <button class="cat-btn" data-cat="Janta">🍽️ Janta</button>
+  <div id="destaquesSection" class="destaques-section">
+    <div class="section-header">
+      <i class="material-icons" style="color: #f39c12;">local_fire_department</i>
+      <h2>Destaques da semana</h2>
     </div>
+    <div id="destaquesContainer" class="destaques-horizontal"></div>
+  </div>
 
-    <!-- Destaques -->
-    <div id="destaquesSection" class="destaques-section">
-      <div class="section-header">
-        <i class="material-icons" style="color: #f39c12;">local_fire_department</i>
-        <h2>Destaques da semana</h2>
-      </div>
-      <div id="destaquesContainer" class="destaques-horizontal"></div>
-    </div>
+  <div class="list-header">
+    <h2 id="listTitle">Comércios parceiros</h2>
+    <span id="resultCount" class="result-badge">0 resultados</span>
+  </div>
 
-    <!-- Cabeçalho da lista + contador -->
-    <div class="list-header">
-      <h2 id="listTitle">Comércios parceiros</h2>
-      <span id="resultCount" class="result-badge">0 resultados</span>
-    </div>
+  <div id="comerciosGrid" class="comercios-grid"></div>
+  <div id="emptyMessage" class="empty-message" style="display: none;">Nenhum comércio encontrado 😕</div>
+</main>
 
-    <!-- Grid de comércios -->
-    <div id="comerciosGrid" class="comercios-grid"></div>
-    <div id="emptyMessage" class="empty-message" style="display: none;">Nenhum comércio encontrado 😕</div>
-  </main>
+<nav class="bottom-nav">
+  <button class="nav-item active" data-tab="inicio"><i class="material-icons">home</i><span>Início</span></button>
+  <button class="nav-item" data-tab="buscar"><i class="material-icons">search</i><span>Buscar</span></button>
+  <button class="nav-item" data-tab="favoritos"><i class="material-icons">favorite</i><span>Favoritos</span></button>
+  <button class="nav-item" data-tab="perfil"><i class="material-icons">person</i><span>Perfil</span></button>
+</nav>
 
-  <!-- NAVEGAÇÃO INFERIOR -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" data-tab="inicio">
-      <i class="material-icons">home</i>
-      <span>Início</span>
-    </button>
-    <button class="nav-item" data-tab="buscar">
-      <i class="material-icons">search</i>
-      <span>Buscar</span>
-    </button>
-    <button class="nav-item" data-tab="favoritos">
-      <i class="material-icons">favorite</i>
-      <span>Favoritos</span>
-    </button>
-    <button class="nav-item" data-tab="perfil">
-      <i class="material-icons">person</i>
-      <span>Perfil</span>
-    </button>
-  </nav>
+<script>
+  // ========== LISTA COMPLETA DE BAIRROS (FORNECIDA PELO USUÁRIO) ==========
+  const bairrosJoaoPessoa = [
+    "Aeroclube", "Água Fria", "Altiplano Cabo Branco", "Alto do Céu", "Alto do Mateus", "Anatólia", "Bancários",
+    "Barra de Gramame", "Bessa", "Brisamar", "Cabo Branco", "Castelo Branco", "Centro", "Cidade dos Colibris",
+    "Costa do Sol", "Costa e Silva", "Cristo Redentor", "Cruz das Armas", "Cuiá", "Distrito Industrial",
+    "Ernani Sátiro", "Ernesto Geisel", "Estados", "Expedicionários", "Funcionários", "Gramame", "Grotão",
+    "Ilha do Bispo", "Indústrias", "Ipês", "Jaguaribe", "Jardim Cidade Universitária", "Jardim Oceania",
+    "Jardim São Paulo", "Jardim Veneza", "João Agripino", "João Paulo II", "José Américo", "Manaíra",
+    "Mandacaru", "Mangabeira", "Miramar", "Muçumagro", "Mumbaba", "Mussuré", "Oitizeiro", "Padre Zé",
+    "Paratibe", "Pedro Gondim", "Penha", "Planalto da Boa Esperança", "Ponta do Seixas", "Portal do Sol",
+    "Róger", "São José", "Tambaú", "Tambauzinho", "Tambiá", "Torre", "Treze de Maio", "Trincheiras",
+    "Valentina Figueiredo", "Varadouro", "Varjão"
+  ];
 
-  <script>
-    // ========== DADOS DOS COMÉRCIOS (EXISTENTES) ==========
-    const comercios = [
-      {
-        id: 1,
-        nome: "Sopa da Tia Ivaneide",
-        categoria: "Janta",
-        imagem: "https://lh3.googleusercontent.com/d/1sQhI6tbfiNzeY6kSzaOsGK9Z13upZ_sl",
-        whatsapp: "5583999999999",
-        verificado: true,
-        destaque: true,
-        descricao: "Sabor caseiro e sustância: cubos macios de carne bovina cozidos lentamente com legumes selecionados e o tempero especial da Tia Ivaneide. Conforto em cada colherada."
-      },
-      {
-        id: 2,
-        nome: "Supermercado Bom Preço",
-        categoria: "Mercados",
-        imagem: "https://placehold.co/600x400/87CEEB/white?text=Bom+Preço",
-        whatsapp: "5583888888888",
-        verificado: false,
-        destaque: false,
-        descricao: "Produtos frescos, açougue e padaria quentinha."
-      },
-      {
-        id: 3,
-        nome: "Farmácia Popular",
-        categoria: "Farmácia",
-        imagem: "https://placehold.co/600x400/98FB98/white?text=Farmácia+Popular",
-        whatsapp: "5583777777777",
-        verificado: true,
-        destaque: true,
-        descricao: "Medicamentos genéricos e atendimento 24h com entrega."
-      },
-      {
-        id: 4,
-        nome: "Mecânica Rápida",
-        categoria: "Serviços",
-        imagem: "https://placehold.co/600x400/D3D3D3/white?text=Mecânica+Rápida",
-        whatsapp: "5583666666666",
-        verificado: false,
-        destaque: false,
-        descricao: "Revisão, troca de óleo, freios e diagnósticos."
-      },
-      {
-        id: 5,
-        nome: "Mercado do Bairro",
-        categoria: "Mercados",
-        imagem: "https://placehold.co/600x400/FFDAB9/white?text=Mercado+Bairro",
-        whatsapp: "5583555555555",
-        verificado: true,
-        destaque: true,
-        descricao: "Hortifrúti orgânico e produtos regionais."
-      },
-      {
-        id: 6,
-        nome: "Pet Shop Amigo",
-        categoria: "Serviços",
-        imagem: "https://placehold.co/600x400/B0E0E6/white?text=Pet+Shop",
-        whatsapp: "5583444444444",
-        verificado: false,
-        destaque: false,
-        descricao: "Banho, tosa, rações premium e acessórios."
-      },
-      {
-        id: 7,
-        nome: "Lanchonete Sabor Caseiro",
-        categoria: "Lanches",
-        imagem: "https://placehold.co/600x400/F0E68C/white?text=Sabor+Caseiro",
-        whatsapp: "5583333333333",
-        verificado: true,
-        destaque: false,
-        descricao: "Pastéis artesanais, sucos naturais e tapioca."
-      },
-      {
-        id: 8,
-        nome: "Drogaria Saúde Total",
-        categoria: "Farmácia",
-        imagem: "https://placehold.co/600x400/FFB6C1/white?text=Saúde+Total",
-        whatsapp: "5583222222222",
-        verificado: true,
-        destaque: false,
-        descricao: "Manipulação, cosméticos e perfumaria."
-      }
-    ];
+  // ========== DADOS DOS COMÉRCIOS (COM IMAGENS CORRIGIDAS E BAIRROS ATRIBUÍDOS) ==========
+  const comercios = [
+    {
+      id: 1,
+      nome: "Mercado do Bairro",
+      categoria: "Mercados",
+      imagem: "https://drive.google.com/uc?export=view&id=1w7lz_hSIVVseyDWSlqFTgYOQD0fleyC0",
+      whatsapp: "5583888888888",
+      verificado: true,
+      destaque: true,
+      bairro: "Bancários",
+      descricao: "O Mercado do Bairro é a opção ideal para quem busca praticidade, economia e um atendimento próximo e de confiança no dia a dia."
+    },
+    {
+      id: 2,
+      nome: "Farmácia Popular",
+      categoria: "Farmácia",
+      imagem: "https://drive.google.com/uc?export=view&id=10NGiUsDmsMDuN22XqhdXjVdyv-zb4RiT",
+      whatsapp: "5583777777777",
+      verificado: true,
+      destaque: true,
+      bairro: "Centro",
+      descricao: "Medicamentos essenciais a preços acessíveis e atendimento rápido."
+    },
+    {
+      id: 3,
+      nome: "Mecânica Rápida",
+      categoria: "Serviços",
+      imagem: "https://drive.google.com/uc?export=view&id=1nDce-_7f867PfDxE7ErHClLqg-VQ8Ate",
+      whatsapp: "5583666666666",
+      verificado: true,
+      destaque: true,
+      bairro: "Jaguaribe",
+      descricao: "Revisão, troca de óleo, freios e diagnósticos."
+    },
+    {
+      id: 4,
+      nome: "Kasa do Keijo",
+      categoria: "Mercados",
+      imagem: "https://drive.google.com/uc?export=view&id=1TReBBs78q2ClvzV0aD1Q-7gmkNW-xFp_",
+      whatsapp: "5583555555555",
+      verificado: true,
+      destaque: true,
+      bairro: "Manaíra",
+      descricao: "Hortifrúti orgânico e produtos regionais."
+    },
+    {
+      id: 5,
+      nome: "Pet Shop Amigo",
+      categoria: "Serviços",
+      imagem: "https://drive.google.com/uc?export=view&id=1ClEf2BMuptQ6630rC-suE68OqtzQ9DTY",
+      whatsapp: "5583444444444",
+      verificado: false,
+      destaque: false,
+      bairro: "Cabo Branco",
+      descricao: "Banho, tosa, rações premium e acessórios."
+    },
+    {
+      id: 6,
+      nome: "Lanchonete Sabor Caseiro",
+      categoria: "Lanches",
+      imagem: "https://drive.google.com/uc?export=view&id=1r2itKtkyxuJyM5oXnfg7G6QZTRtII8_6",
+      whatsapp: "5583333333333",
+      verificado: true,
+      destaque: false,
+      bairro: "Tambauzinho",
+      descricao: "Pastéis artesanais, sucos naturais e tapioca."
+    }
+  ];
 
-    // ========== ESTRUTURA DE PROMOÇÕES ==========
-    const promocoes = [
-      {
-        nome: "Hambúrguer + Batata",
-        preco: "R$ 19,90",
-        imagem: "https://placehold.co/600x400/FFB347/white?text=Hambúrguer",
-        tag: "🔥 Hoje"
-      },
-      {
-        nome: "Pizza Grande (8 fatias)",
-        preco: "R$ 29,90",
-        imagem: "https://placehold.co/600x400/FF6B6B/white?text=Pizza",
-        tag: "🎉 Promoção"
-      },
-      {
-        nome: "Refrigerante 2L",
-        preco: "R$ 7,90",
-        imagem: "https://placehold.co/600x400/4ECDC4/white?text=Refri",
-        tag: "💸 Oferta"
-      },
-      {
-        nome: "Combo Acai 500ml",
-        preco: "R$ 12,90",
-        imagem: "https://placehold.co/600x400/9B59B6/white?text=Açaí",
-        tag: "🥣 Do dia"
-      },
-      {
-        nome: "Coxinha + Suco",
-        preco: "R$ 9,90",
-        imagem: "https://placehold.co/600x400/E67E22/white?text=Coxinha",
-        tag: "⭐ Lanche Rápido"
-      }
-    ];
+  let favoritos = JSON.parse(localStorage.getItem('aquiTem_favoritos')) || [];
+  let activeTab = 'inicio';
+  let activeCategory = 'all';
+  let selectedBairro = 'all';
+  let searchTerm = '';
 
-    let favoritos = JSON.parse(localStorage.getItem('aquiTem_favoritos')) || [];
-    let activeTab = 'inicio';
-    let activeCategory = 'all';
-    let searchTerm = '';
+  // Elementos DOM
+  const searchInput = document.getElementById('searchInput');
+  const gridContainer = document.getElementById('comerciosGrid');
+  const emptyMsg = document.getElementById('emptyMessage');
+  const listTitle = document.getElementById('listTitle');
+  const resultCountSpan = document.getElementById('resultCount');
+  const destaquesContainer = document.getElementById('destaquesContainer');
+  const bairroSelect = document.getElementById('bairroSelect');
 
-    const searchInput = document.getElementById('searchInput');
-    const gridContainer = document.getElementById('comerciosGrid');
-    const emptyMsg = document.getElementById('emptyMessage');
-    const listTitle = document.getElementById('listTitle');
-    const resultCountSpan = document.getElementById('resultCount');
-    const destaquesSection = document.getElementById('destaquesSection');
-    const destaquesContainer = document.getElementById('destaquesContainer');
+  // Popular select de bairros
+  function popularBairrosSelect() {
+    bairroSelect.innerHTML = '<option value="all">📌 Todos os bairros</option>';
+    bairrosJoaoPessoa.forEach(bairro => {
+      const option = document.createElement('option');
+      option.value = bairro;
+      option.textContent = bairro;
+      bairroSelect.appendChild(option);
+    });
+  }
+  popularBairrosSelect();
 
-    // ========== AUTOPLAY DO CARROSSEL ==========
-    let autoplayInterval = null;
-    let isAutoPlaying = true;
-    const carousel = document.getElementById('carouselPromocoes');
-    const autoplayStatusSpan = document.getElementById('autoplayStatus');
+  // Salvar favoritos
+  function salvarFavoritos() {
+    localStorage.setItem('aquiTem_favoritos', JSON.stringify(favoritos));
+  }
 
-    function startAutoplay() {
-      if (autoplayInterval) clearInterval(autoplayInterval);
-      if (!carousel || promocoes.length === 0) return;
-      
-      autoplayInterval = setInterval(() => {
-        if (!isAutoPlaying) return;
-        if (!carousel) return;
-        
-        // Largura visível do carrossel + gap
-        const cardWidth = 260; // largura fixa do card
-        const gap = 16;
-        const scrollAmount = cardWidth + gap;
-        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-        
-        let newScrollLeft = carousel.scrollLeft + scrollAmount;
-        // Se chegou ao fim, volta para o início (loop suave)
-        if (newScrollLeft >= maxScroll - 5) {
-          newScrollLeft = 0;
-        }
-        
-        carousel.scrollTo({
-          left: newScrollLeft,
-          behavior: 'smooth'
-        });
-      }, 4000); // a cada 4 segundos
-      
-      autoplayStatusSpan.innerText = '▶ Rodando';
+  function toggleFavorito(id) {
+    if (favoritos.includes(id)) favoritos = favoritos.filter(favId => favId !== id);
+    else favoritos.push(id);
+    salvarFavoritos();
+    renderizar();
+  }
+
+  // Filtro combinado (categoria + busca + bairro + favoritos)
+  function getComerciosFiltrados() {
+    let lista = [];
+    if (activeTab === 'favoritos') {
+      lista = comercios.filter(c => favoritos.includes(c.id));
+    } else {
+      lista = [...comercios];
     }
 
-    function stopAutoplay() {
-      if (autoplayInterval) {
-        clearInterval(autoplayInterval);
-        autoplayInterval = null;
-      }
-      autoplayStatusSpan.innerText = '⏸ Pausado';
+    if (activeCategory !== 'all') {
+      lista = lista.filter(c => c.categoria === activeCategory);
     }
 
-    function resetAutoplayTimer() {
-      if (!isAutoPlaying) return;
-      // Para e reinicia o autoplay (quando o usuário interage)
-      if (autoplayInterval) {
-        clearInterval(autoplayInterval);
-        startAutoplay();
-      }
+    if (selectedBairro !== 'all') {
+      lista = lista.filter(c => c.bairro === selectedBairro);
     }
 
-    // Eventos para pausar autoplay durante interação manual
-    function pauseAutoplayTemporarily() {
-      if (!isAutoPlaying) return;
-      stopAutoplay();
-      // Volta a tocar após 10 segundos sem interação
-      setTimeout(() => {
-        if (isAutoPlaying && !autoplayInterval) {
-          startAutoplay();
-        }
-      }, 10000);
+    if (searchTerm.trim() !== '') {
+      const term = searchTerm.toLowerCase();
+      lista = lista.filter(c =>
+        c.nome.toLowerCase().includes(term) ||
+        c.categoria.toLowerCase().includes(term) ||
+        c.descricao.toLowerCase().includes(term) ||
+        (c.bairro && c.bairro.toLowerCase().includes(term))
+      );
     }
+    return lista;
+  }
 
-    if (carousel) {
-      // Pausa quando o usuário arrasta ou clica
-      carousel.addEventListener('mousedown', () => {
-        if (isAutoPlaying) stopAutoplay();
-      });
-      carousel.addEventListener('mouseup', () => {
-        if (isAutoPlaying) {
-          setTimeout(() => startAutoplay(), 3000);
-        }
-      });
-      carousel.addEventListener('touchstart', () => {
-        if (isAutoPlaying) stopAutoplay();
-      });
-      carousel.addEventListener('touchend', () => {
-        if (isAutoPlaying) {
-          setTimeout(() => startAutoplay(), 3000);
-        }
-      });
-      // Scroll manual também reseta
-      carousel.addEventListener('scroll', () => {
-        if (isAutoPlaying) {
-          resetAutoplayTimer();
-        }
-      });
+  function renderizarComercios() {
+    const filtrados = getComerciosFiltrados();
+    if (filtrados.length === 0) {
+      gridContainer.style.display = 'none';
+      emptyMsg.style.display = 'block';
+      resultCountSpan.innerText = '0 resultados';
+      return;
     }
+    gridContainer.style.display = 'grid';
+    emptyMsg.style.display = 'none';
+    resultCountSpan.innerText = `${filtrados.length} ${filtrados.length === 1 ? 'resultado' : 'resultados'}`;
 
-    // ========== RENDERIZAR PROMOÇÕES ==========
-    function renderizarPromocoes() {
-      if (!carousel) return;
-      if (promocoes.length === 0) {
-        carousel.innerHTML = '<p style="padding: 1rem;">Nenhuma promoção ativa no momento.</p>';
-        return;
-      }
-      
-      carousel.innerHTML = '';
-      promocoes.forEach(promo => {
-        const promoCard = document.createElement('div');
-        promoCard.className = 'promo-card';
-        promoCard.innerHTML = `
-          <img class="promo-img" src="${promo.imagem}" alt="${promo.nome}" loading="lazy">
-          <div class="promo-info">
-            <div class="promo-nome">${promo.nome}</div>
-            <div class="promo-preco">${promo.preco}</div>
-            ${promo.tag ? `<span class="promo-tag">${promo.tag}</span>` : ''}
-          </div>
-        `;
-        carousel.appendChild(promoCard);
-      });
-      
-      // Inicia autoplay após renderizar
-      if (isAutoPlaying) {
-        startAutoplay();
-      }
-    }
+    gridContainer.innerHTML = '';
+    filtrados.forEach(comercio => {
+      const isFavorito = favoritos.includes(comercio.id);
+      const card = document.createElement('div');
+      card.className = 'card-comercio';
 
-    // Alternar autoplay (opcional: clicar no indicador pausa/play)
-    if (autoplayStatusSpan) {
-      autoplayStatusSpan.style.cursor = 'pointer';
-      autoplayStatusSpan.addEventListener('click', () => {
-        if (isAutoPlaying) {
-          isAutoPlaying = false;
-          stopAutoplay();
-          autoplayStatusSpan.innerText = '⏸ Pausado';
-        } else {
-          isAutoPlaying = true;
-          startAutoplay();
-          autoplayStatusSpan.innerText = '▶ Rodando';
-        }
-      });
-    }
+      let badgesHtml = '';
+      if (comercio.verificado) badgesHtml += `<span class="badge-verified"><i class="material-icons" style="font-size:0.8rem;">verified</i> Verificado</span>`;
+      if (comercio.destaque) badgesHtml += `<span class="badge-destaque"><i class="material-icons" style="font-size:0.8rem;">local_fire_department</i> Destaque</span>`;
 
-    function salvarFavoritos() {
-      localStorage.setItem('aquiTem_favoritos', JSON.stringify(favoritos));
-    }
-
-    function toggleFavorito(id) {
-      if (favoritos.includes(id)) {
-        favoritos = favoritos.filter(favId => favId !== id);
-      } else {
-        favoritos.push(id);
-      }
-      salvarFavoritos();
-      renderizar();
-    }
-
-    function getComerciosFiltrados() {
-      let lista = [];
-      if (activeTab === 'favoritos') {
-        lista = comercios.filter(c => favoritos.includes(c.id));
-      } else {
-        lista = [...comercios];
-      }
-
-      if (activeCategory !== 'all') {
-        lista = lista.filter(c => c.categoria === activeCategory);
-      }
-
-      if (searchTerm.trim() !== '') {
-        const term = searchTerm.toLowerCase();
-        lista = lista.filter(c =>
-          c.nome.toLowerCase().includes(term) ||
-          c.categoria.toLowerCase().includes(term) ||
-          c.descricao.toLowerCase().includes(term)
-        );
-      }
-      return lista;
-    }
-
-    function renderizarComercios() {
-      const filtrados = getComerciosFiltrados();
-      if (filtrados.length === 0) {
-        gridContainer.style.display = 'none';
-        emptyMsg.style.display = 'block';
-        resultCountSpan.innerText = '0 resultados';
-        return;
-      }
-      gridContainer.style.display = 'grid';
-      emptyMsg.style.display = 'none';
-      resultCountSpan.innerText = `${filtrados.length} ${filtrados.length === 1 ? 'resultado' : 'resultados'}`;
-
-      gridContainer.innerHTML = '';
-      filtrados.forEach(comercio => {
-        const isFavorito = favoritos.includes(comercio.id);
-        const card = document.createElement('div');
-        card.className = 'card-comercio';
-
-        let badgesHtml = '';
-        if (comercio.verificado) {
-          badgesHtml += `<span class="badge-verified"><i class="material-icons" style="font-size: 0.8rem;">verified</i> Verificado</span>`;
-        }
-        if (comercio.destaque) {
-          badgesHtml += `<span class="badge-destaque"><i class="material-icons" style="font-size: 0.8rem;">local_fire_department</i> Destaque</span>`;
-        }
-
-        card.innerHTML = `
-          <img class="card-img" src="${comercio.imagem}" alt="${comercio.nome}" loading="lazy">
-          <div class="card-badges">${badgesHtml}</div>
-          <div class="card-content">
-            <h3>${comercio.nome}</h3>
-            <span class="categoria-tag">${comercio.categoria}</span>
-            <p class="descricao">${comercio.descricao}</p>
-            <div class="card-actions">
-              <a href="https://wa.me/${comercio.whatsapp}?text=Olá! Vi o anúncio no AquiTem e gostaria de mais informações." target="_blank" class="btn-wpp">
-                <i class="material-icons">whatsapp</i> WhatsApp
-              </a>
-              <button class="btn-fav ${isFavorito ? 'favoritado' : ''}" data-id="${comercio.id}">
-                <i class="material-icons">favorite</i>
-              </button>
-            </div>
-          </div>
-        `;
-        gridContainer.appendChild(card);
-      });
-
-      document.querySelectorAll('.btn-fav').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const id = parseInt(btn.dataset.id);
-          toggleFavorito(id);
-        });
-      });
-    }
-
-    function renderizarDestaques() {
-      if (activeTab !== 'inicio') {
-        destaquesSection.style.display = 'none';
-        return;
-      }
-      destaquesSection.style.display = 'block';
-      const destaquesItens = comercios.filter(c => c.destaque === true);
-      if (destaquesItens.length === 0) {
-        destaquesContainer.innerHTML = '<p style="padding: 1rem; background: white; border-radius: 20px;">Nenhum destaque no momento</p>';
-        return;
-      }
-      destaquesContainer.innerHTML = '';
-      destaquesItens.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card-destaque';
-        card.innerHTML = `
-          <img src="${item.imagem}" alt="${item.nome}">
-          <div class="destaque-info">
-            <h4>${item.nome}</h4>
-            <p>${item.categoria}</p>
-            <a href="https://wa.me/${item.whatsapp}?text=Olá! Vi o destaque no AquiTem e quero saber mais." target="_blank" class="wpp-mini">
-              <i class="material-icons">whatsapp</i> Contato
+      card.innerHTML = `
+        <img class="card-img" src="${comercio.imagem}" alt="${comercio.nome}" loading="lazy" 
+             onerror="this.onerror=null; this.src='https://placehold.co/600x400/2ECC71/white?text=${encodeURIComponent(comercio.nome)}'">
+        <div class="card-badges">${badgesHtml}</div>
+        <div class="card-content">
+          <h3>${comercio.nome}</h3>
+          <span class="categoria-tag">${comercio.categoria}</span>
+          <p class="descricao">${comercio.descricao.substring(0, 100)}${comercio.descricao.length > 100 ? '…' : ''}</p>
+          <div class="card-actions">
+            <a href="https://wa.me/${comercio.whatsapp}?text=Olá! Vi o anúncio no AquiTem e gostaria de mais informações." target="_blank" class="btn-wpp">
+              <i class="material-icons">whatsapp</i> WhatsApp
             </a>
+            <button class="btn-fav ${isFavorito ? 'favoritado' : ''}" data-id="${comercio.id}">
+              <i class="material-icons">favorite</i>
+            </button>
           </div>
-        `;
-        destaquesContainer.appendChild(card);
-      });
-    }
-
-    function renderizarPerfil() {
-      const totalFavoritos = favoritos.length;
-      gridContainer.style.display = 'block';
-      gridContainer.innerHTML = `
-        <div class="perfil-container">
-          <div class="perfil-avatar">
-            <i class="material-icons">storefront</i>
-          </div>
-          <h3>Minha Conta</h3>
-          <p style="color: #475569;">Bem-vindo ao ecossistema AquiTem</p>
-          <div class="fav-stats">
-            <i class="material-icons">favorite</i> ${totalFavoritos} comércio${totalFavoritos !== 1 ? 's' : ''} favoritado${totalFavoritos !== 1 ? 's' : ''}
-          </div>
-          <p style="font-size: 0.75rem; margin-top: 1rem; color: #334155;">Sua rede de comércios locais, sempre na mão</p>
-          <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 0.5rem;">AquiTem v2.0 · conexão segura via WhatsApp</p>
         </div>
       `;
-      emptyMsg.style.display = 'none';
-      resultCountSpan.innerText = '';
-      listTitle.innerText = 'Perfil';
+      gridContainer.appendChild(card);
+    });
+
+    document.querySelectorAll('.btn-fav').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = parseInt(btn.dataset.id);
+        toggleFavorito(id);
+      });
+    });
+  }
+
+  function renderizarDestaques() {
+    if (activeTab !== 'inicio') {
+      document.getElementById('destaquesSection').style.display = 'none';
+      return;
     }
-
-    function renderizar() {
-      if (activeTab === 'perfil') {
-        renderizarPerfil();
-        return;
-      }
-
-      if (activeTab === 'favoritos') {
-        listTitle.innerText = 'Meus Favoritos';
-      } else if (activeTab === 'buscar') {
-        listTitle.innerText = 'Resultados da busca';
-      } else {
-        listTitle.innerText = 'Comércios parceiros';
-      }
-
-      renderizarComercios();
-      renderizarDestaques();
+    document.getElementById('destaquesSection').style.display = 'block';
+    const destaquesItens = comercios.filter(c => c.destaque === true);
+    if (destaquesItens.length === 0) {
+      destaquesContainer.innerHTML = '<p style="padding:1rem; background:white; border-radius:20px;">Nenhum destaque no momento</p>';
+      return;
     }
+    destaquesContainer.innerHTML = '';
+    destaquesItens.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card-destaque';
+      card.innerHTML = `
+        <img src="${item.imagem}" alt="${item.nome}" onerror="this.onerror=null; this.src='https://placehold.co/600x400/2ECC71/white?text=Destaque'">
+        <div class="destaque-info">
+          <h4>${item.nome}</h4>
+          <p>${item.categoria} • ${item.bairro}</p>
+          <a href="https://wa.me/${item.whatsapp}?text=Olá! Vi o destaque no AquiTem e quero saber mais." target="_blank" class="wpp-mini">
+            <i class="material-icons">whatsapp</i> Contato
+          </a>
+        </div>
+      `;
+      destaquesContainer.appendChild(card);
+    });
+  }
 
-    function initEventListeners() {
-      searchInput.addEventListener('input', (e) => {
-        searchTerm = e.target.value;
+  function renderizarPerfil() {
+    const totalFavoritos = favoritos.length;
+    gridContainer.style.display = 'block';
+    gridContainer.innerHTML = `
+      <div class="perfil-container">
+        <div class="perfil-avatar"><i class="material-icons">storefront</i></div>
+        <h3>Minha Conta</h3>
+        <p style="color:#475569;">Bem-vindo ao ecossistema AquiTem</p>
+        <div class="fav-stats"><i class="material-icons">favorite</i> ${totalFavoritos} comércio${totalFavoritos !== 1 ? 's' : ''} favoritado${totalFavoritos !== 1 ? 's' : ''}</div>
+        <p style="font-size:0.75rem; margin-top:1rem; color:#334155;">Sua rede de comércios locais, sempre na mão</p>
+        <p style="font-size:0.7rem; color:#94a3b8;">AquiTem v2.0 · conexão segura via WhatsApp</p>
+      </div>
+    `;
+    emptyMsg.style.display = 'none';
+    resultCountSpan.innerText = '';
+    listTitle.innerText = 'Perfil';
+  }
+
+  function renderizar() {
+    if (activeTab === 'perfil') {
+      renderizarPerfil();
+      return;
+    }
+    if (activeTab === 'favoritos') listTitle.innerText = 'Meus Favoritos';
+    else if (activeTab === 'buscar') listTitle.innerText = 'Resultados da busca';
+    else listTitle.innerText = 'Comércios parceiros';
+    renderizarComercios();
+    renderizarDestaques();
+  }
+
+  // Eventos
+  function initEventListeners() {
+    searchInput.addEventListener('input', (e) => { searchTerm = e.target.value; renderizar(); });
+    bairroSelect.addEventListener('change', (e) => { selectedBairro = e.target.value; renderizar(); });
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCategory = btn.dataset.cat;
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
         renderizar();
       });
-
-      document.querySelectorAll('.cat-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const cat = btn.dataset.cat;
-          activeCategory = cat;
-          document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          renderizar();
-        });
+    });
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        activeTab = item.dataset.tab;
+        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+        item.classList.add('active');
+        renderizar();
       });
+    });
+  }
 
-      document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', () => {
-          const tab = item.dataset.tab;
-          activeTab = tab;
-          document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-          item.classList.add('active');
-          renderizar();
-        });
-      });
-    }
+  // Carrossel de promoções com autoplay (mantido)
+  const promocoes = [
+    { nome: "Hambúrguer + Batata", preco: "R$ 19,90", imagem: "https://placehold.co/600x400/FFB347/white?text=Hambúrguer", tag: "🔥 Hoje" },
+    { nome: "Pizza Grande (8 fatias)", preco: "R$ 29,90", imagem: "https://placehold.co/600x400/FF6B6B/white?text=Pizza", tag: "🎉 Promoção" },
+    { nome: "Refrigerante 2L", preco: "R$ 7,90", imagem: "https://placehold.co/600x400/4ECDC4/white?text=Refri", tag: "💸 Oferta" },
+    { nome: "Combo Acai 500ml", preco: "R$ 12,90", imagem: "https://placehold.co/600x400/9B59B6/white?text=Açaí", tag: "🥣 Do dia" },
+    { nome: "Coxinha + Suco", preco: "R$ 9,90", imagem: "https://placehold.co/600x400/E67E22/white?text=Coxinha", tag: "⭐ Lanche Rápido" }
+  ];
+  const carouselPromo = document.getElementById('carouselPromocoes');
+  let autoplayInterval;
+  let isAutoPlaying = true;
+  function startAutoplay() {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+    if (!carouselPromo || promocoes.length === 0) return;
+    autoplayInterval = setInterval(() => {
+      if (!isAutoPlaying || !carouselPromo) return;
+      const cardWidth = 260, gap = 16;
+      const maxScroll = carouselPromo.scrollWidth - carouselPromo.clientWidth;
+      let newLeft = carouselPromo.scrollLeft + (cardWidth + gap);
+      if (newLeft >= maxScroll - 5) newLeft = 0;
+      carouselPromo.scrollTo({ left: newLeft, behavior: 'smooth' });
+    }, 4000);
+    document.getElementById('autoplayStatus').innerText = '▶ Rodando';
+  }
+  function renderizarPromocoes() {
+    if (!carouselPromo) return;
+    carouselPromo.innerHTML = '';
+    promocoes.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'promo-card';
+      div.innerHTML = `<img class="promo-img" src="${p.imagem}" alt="${p.nome}"><div class="promo-info"><div class="promo-nome">${p.nome}</div><div class="promo-preco">${p.preco}</div><span class="promo-tag">${p.tag}</span></div>`;
+      carouselPromo.appendChild(div);
+    });
+    startAutoplay();
+  }
+  document.getElementById('autoplayStatus')?.addEventListener('click', () => {
+    if (isAutoPlaying) { isAutoPlaying = false; clearInterval(autoplayInterval); document.getElementById('autoplayStatus').innerText = '⏸ Pausado'; }
+    else { isAutoPlaying = true; startAutoplay(); }
+  });
 
-    function init() {
-      initEventListeners();
-      renderizarPromocoes(); // carrega o carrossel e inicia autoplay
-      renderizar();
-    }
-
-    init();
-  </script>
+  function init() {
+    initEventListeners();
+    renderizarPromocoes();
+    renderizar();
+  }
+  init();
+</script>
 </body>
 </html>
